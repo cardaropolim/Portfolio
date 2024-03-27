@@ -48,6 +48,14 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
+         // Redirect User with his role
+    if (in_array('ROLE_MODELE', $token->getRoleNames())) {
+        return new RedirectResponse($this->urlGenerator->generate('app_modele_index'));
+    }
+    if (in_array('ROLE_PHOTOGRAPHE', $token->getRoleNames())) {
+        return new RedirectResponse($this->urlGenerator->generate('app_photographe_index'));
+    }
+
         // For example:
         return new RedirectResponse($this->urlGenerator->generate('app_index'));
         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
