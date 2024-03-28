@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig' %} 
 
 {% block title %}Connexion{% endblock %}
 
@@ -15,7 +15,7 @@
     {% endif %}
 
     <h1 class="h3 mb-3 font-weight-normal">Connectez-vous</h1>
-    <label for="inputEmail">Adresse mail</label>
+    <label for="inputEmail">Adresse email</label>
     <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
     <br>
     <label for="inputPassword">Mot de passe</label>
@@ -24,7 +24,7 @@
     <input type="hidden" name="_csrf_token"
            value="{{ csrf_token('authenticate') }}"
     >
-    
+
     <div class="checkbox mb-3">
         <label>
             <input type="checkbox" name="_remember_me"> Se souvenir de moi

@@ -50,6 +50,10 @@ class Modele
     #[ORM\Column(length: 255)]
     private ?string $type_ethnique = null;
 
+    #[ORM\OneToOne(inversedBy: 'modele', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -195,6 +199,18 @@ class Modele
     public function setTypeEthnique(string $type_ethnique): static
     {
         $this->type_ethnique = $type_ethnique;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): static
+    {
+        $this->user = $user;
 
         return $this;
     }
