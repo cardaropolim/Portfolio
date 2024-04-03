@@ -42,5 +42,49 @@ class ModeleController extends AbstractController
         return $this->render('modele/profile-form.html.twig', [
             'form' => $form,
         ]);
-    } 
+    }
+
+    #[Route('/contacts', name: 'contacts')]
+    public function contacts(): Response
+    {
+        return $this->render('modele/contacts.html.twig', []);
+    }
+
+     #[Route('/disponibilites', name: 'disponibilites')]
+     public function disponibilites(): Response
+     {
+         return $this->render('modele/disponibilites.html.twig', []);
+
+     }
+    #[Route('/mobilite', name: 'mobilite')]
+
+    public function mobilite(): Response
+    {
+        return $this->render('modele/mobilite.html.twig', []);
+    }
+    #[Route('/informations', name: 'informations')]
+
+    public function informations(): Response
+    {
+        return $this->render('modele/profile-form.html.twig', []);
+    }
+
+    #[Route('/reseaux_sociaux', name: 'reseaux_sociaux')]
+
+    public function reseaux_sociaux(): Response
+    {
+        return $this->render('modele/reseaux-sociaux.html.twig', []);
+    }
+    #[Route('/statistiques', name: 'statistiques')]
+
+    public function statistiques(): Response
+    {
+        return $this->render('modele/statistiques.html.twig', []);
+    }
+    #[Route('/tarifs', name: 'tarifs')]
+
+    public function tarifs(): Response
+    {
+        return $this->render('modele/tarifs.html.twig', []);
+    }
 }
