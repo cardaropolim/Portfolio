@@ -38,9 +38,12 @@ class ModeleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($modele);
             $entityManager->flush();
+
+            return $this->redirectToRoute('app_modele_index');
+            
         }
         return $this->render('modele/profile-form.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -81,10 +84,24 @@ class ModeleController extends AbstractController
     {
         return $this->render('modele/statistiques.html.twig', []);
     }
+    
     #[Route('/tarifs', name: 'tarifs')]
 
     public function tarifs(): Response
     {
         return $this->render('modele/tarifs.html.twig', []);
+    }
+
+    #[Route('/book_modele', name: 'book_modele')]
+
+    public function book_modele(): Response
+    {
+        return $this->render('modele/book-modele.html.twig', []);
+    }
+
+    #[Route('/compte', name: 'compte')]
+    public function compte(): Response
+    {
+        return $this->render('modele/compte.html.twig', []);
     }
 }

@@ -11,13 +11,20 @@
         color: darkcyan;
     }
 
-    .reglages {
+    /* .reglages {
         display: flex;
         align-items: flex-end;
         flex-direction: column;
         justify-content: space-around;
         height: 25em;
-    }
+    } */
+
+    .container {
+      display: flex;
+        align-items: flex-end;
+        /* flex-direction: column;  */
+            
+    } 
 
     body {
         background-color: beige;    
@@ -25,10 +32,15 @@
 
 </style>
 
+
 <div class="example-wrapper">
     <h1>Bienvenue sur Modèle Portfolio</h1> 
 
-     <div class="reglages">   
+<div class="container">
+    <div class="row py-3">
+        <div class="col-5 order-2" id="sticky-sidebar">
+            <div class="sticky-sm-top">
+                <div class="nav flex-column">
         <a href={{ url('app_modele_informations') }} class="btn btn-outline-secondary">Mes Informations</a> 
         <a href={{ url('app_modele_disponibilites') }} class="btn btn-outline-secondary">Disponibilités</a>  
         <a href={{ url('app_modele_contacts') }} class="btn btn-outline-secondary">Contacts</a>  
@@ -37,8 +49,19 @@
         <a href={{ url('app_modele_statistiques') }} class="btn btn-outline-secondary">Statistiques</a> 
         <a href={{ url('app_modele_mobilite') }} class="btn btn-outline-secondary">Mobilité</a> 
         <a href={{ url('app_modele_tarifs') }} class="btn btn-outline-secondary">Tarifs</a> 
-    </div>
+                </div>
+            </div>
+        </div>
 
-
+     {# <div class="reglages">   
+        <a href={{ url('app_modele_informations') }} class="btn btn-outline-secondary">Mes Informations</a> 
+        <a href={{ url('app_modele_disponibilites') }} class="btn btn-outline-secondary">Disponibilités</a>  
+        <a href={{ url('app_modele_contacts') }} class="btn btn-outline-secondary">Contacts</a>  
+        {# <a href='#' class="btn btn-outline-secondary">Livre d'Or</a> #}
+        {# <a href={{ url('app_modele_reseaux_sociaux') }} class="btn btn-outline-secondary">Réseaux Sociaux</a> 
+        <a href={{ url('app_modele_statistiques') }} class="btn btn-outline-secondary">Statistiques</a> 
+        <a href={{ url('app_modele_mobilite') }} class="btn btn-outline-secondary">Mobilité</a> 
+        <a href={{ url('app_modele_tarifs') }} class="btn btn-outline-secondary">Tarifs</a> 
+    </div> #} 
 
 {% endblock %}      

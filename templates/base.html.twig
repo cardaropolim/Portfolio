@@ -16,7 +16,18 @@
     </head>
     <body>
 
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <style>
+
+   .navbar {
+   background-color: Thistle;
+   /* opacity: 65%; */
+   }
+
+    </style>
+
+    
+        
+        <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Portfolio</a>
             {# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
@@ -29,7 +40,6 @@
                     {# dropdown #}
                     {# </li> #} 
       
-                    
         {# <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid"> #}
             {# <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
@@ -41,7 +51,7 @@
 
                                 {% if app.user %}
                             {% if is_granted('ROLE_MODELE') %}
-                        <a href='#' class="btn btn-outline-success">Book Modèle</a>
+                        <a href={{ url('app_modele_book_modele') }} class="btn btn-outline-success" target="_blank">Book Modèle</a>
                             {% if is_granted('ROLE_PHOTOGRAPHE') %}
                         <a href='#' class="btn btn-outline-secondary">Book Photographe</a>
 
@@ -51,18 +61,18 @@
                                     
                             {% if app.user %}
 
-                        <a href='#' class="btn btn-outline-info">Home</a>
-                        <a href='#' class="btn btn-outline-warning">Compte</a>
+                        <a href='{{ url('app_modele_index') }}' class="btn btn-outline-info">Home</a>
+                        <a href='{{ url('app_modele_compte') }}' class="btn btn-outline-warning">Compte</a>
                         <a href={{url("app_logout")}} class="btn btn-outline-danger">Déconnexion</a>
   
                     <ul>
-                    </div>
-                    <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-primary" type="submit">Search</button>
-                    </form>
-                    </ul>
-                    </div>
+                        {# </div>
+                        <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-primary" type="submit">Search</button>
+                        </form>
+                        </ul>
+                        </div> #}
          
                 
             {%else%}
@@ -79,8 +89,8 @@
                 </div>
             </div>
         </div>
-    </nav>
-                    {# <span class="placeholder col-12 bg-info"></span> #}
+     </nav>
+     
     {% block body %}
     {% endblock %}
     </body>

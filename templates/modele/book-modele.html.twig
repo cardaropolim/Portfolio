@@ -1,0 +1,66 @@
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+{% block stylesheet %}
+
+{% endblock %}
+
+{% block body %}
+
+<style>
+
+    html {
+    scroll-behavior: smooth;
+    }
+
+
+    #Biographie, #Contact, #Bibliotheque, #Head {
+        display: flex; 
+        align-items: center;
+        justify-content: center;        
+        height: 25em;
+        background-color: beige   
+    }
+
+    #Contact {
+        flex-direction: column;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-around;
+        background-color: Thistle;
+        word-spacing: 10px;
+
+        
+    }
+
+</style>
+
+
+
+<nav class="navbar">
+      <div class="nav-links">
+
+            <a href="#Biographie" style="text-decoration:none">Biographie</a>
+            <a href="#Bibliotheque" style="text-decoration:none">Bibliothèque</a>
+            <a href="#Contact" style="text-decoration:none">Contact</a>
+     
+      </div>
+    </nav>
+
+<section id="Head"></section>
+
+<section id="Biographie">Biographie</section>
+
+<section id="Bibliotheque">Bibliothèque</section>
+
+<section id="Contact">
+
+          <p><a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a></p>
+          <p><a HREF="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a></p>
+
+
+</section>
+
+
+{% endblock %}    
