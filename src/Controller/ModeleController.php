@@ -26,14 +26,16 @@ class ModeleController extends AbstractController
         ]);
     }
 
-    #[Route('/create-profile', name: 'profile')]
+    #[Route('/informations-profile', name: 'modeleprofile')]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $modele = new Modele();
+        if ($this->getUser()->getModele()) {
+            $modele = $this->getUser()->getModele();
+        }
         $modele->setUser($this->getUser());
         $form = $this->createForm(ModeleFormType::class, $modele);
         $form->handleRequest($request);
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($modele);
@@ -65,12 +67,7 @@ class ModeleController extends AbstractController
     {
         return $this->render('modele/mobilite.html.twig', []);
     }
-    #[Route('/informations', name: 'informations')]
 
-    public function informations(): Response
-    {
-        return $this->render('modele/profile-form.html.twig', []);
-    }
 
     #[Route('/reseaux_sociaux', name: 'reseaux_sociaux')]
 

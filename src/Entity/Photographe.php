@@ -26,6 +26,10 @@ class Photographe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $signes_particuliers = null;
 
+    #[ORM\OneToOne(inversedBy: 'photographe', cascade: ['persist', 'remove'])]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $user = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -75,6 +79,18 @@ class Photographe
     public function setSignesParticuliers(?string $signes_particuliers): static
     {
         $this->signes_particuliers = $signes_particuliers;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->User;
+    }
+
+    public function setUser(?User $User): static
+    {
+        $this->User = $User;
 
         return $this;
     }

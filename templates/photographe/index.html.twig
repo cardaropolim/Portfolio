@@ -1,41 +1,47 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Bienvenue sur Photographe Portfolio{% endblock %}
+{% block title %}Photographe Portfolio{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
-        h1 {
+<style>
+   
+    h1 {
         text-align: center;
         color: darkcyan;
-        }
+    }
 
-        .reglages {
-        display: flex;
+    .container {
+      display: flex;
         align-items: flex-end;
-        flex-direction: column;
-        justify-content: space-around;
-        height: 20em;
-        }
+    } 
+
+    body {
+        background-color: beige;    
+    }
 
 </style>
 
+
 <div class="example-wrapper">
-    <h1>Bienvenue sur Photographe Portfolio</h1>
+    <h1>Bienvenue sur Photographe Portfolio</h1> 
 
-    <div class="reglages">
-        
-    <a href='#' class="btn btn-outline-secondary">Mes Informations</a> 
-     {# <a href="{{ path('disponibilites') }}" class="btn btn-outline-secondary">Disponibilités</a>  #}
-    {# <a href="{{ path('contacts') }}" class="btn btn-outline-secondary">Contacts</a>  #}
-    <a href='#' class="btn btn-outline-secondary">Livre d'Or</a>
-    <a href='#' class="btn btn-outline-secondary">Réseaux Sociaux</a> 
-    <a href='#' class="btn btn-outline-secondary">Statistiques</a> 
-    <a href='#' class="btn btn-outline-secondary">Mobilité</a> 
-    <a href='#' class="btn btn-outline-secondary">Tarifs</a> 
-    </div>
+<div class="container">
+    <div class="row py-3">
+        <div class="col-5 order-2" id="sticky-sidebar">
+            <div class="sticky-sm-top">
+                <div class="nav flex-column">
+        <a href={{ url('app_modele_informations') }} class="btn btn-outline-secondary">Mes Informations</a> 
+        <a href={{ url('app_modele_disponibilites') }} class="btn btn-outline-secondary">Disponibilités</a>  
+        <a href={{ url('app_modele_contacts') }} class="btn btn-outline-secondary">Contacts</a>  
+        {# <a href='#' class="btn btn-outline-secondary">Livre d'Or</a> #}
+        <a href={{ url('app_modele_reseaux_sociaux') }} class="btn btn-outline-secondary">Réseaux Sociaux</a> 
+        <a href={{ url('app_modele_statistiques') }} class="btn btn-outline-secondary">Statistiques</a> 
+        <a href={{ url('app_modele_mobilite') }} class="btn btn-outline-secondary">Mobilité</a> 
+        <a href={{ url('app_modele_tarifs') }} class="btn btn-outline-secondary">Tarifs</a> 
+                </div>
+            </div>
+        </div>
 
-</div>
-{% endblock %}
+
+{% endblock %}      

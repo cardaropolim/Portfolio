@@ -14,8 +14,6 @@ class Modele
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $reseaux_sociaux = null;
 
     #[ORM\Column(length: 255)]
     private ?string $agence = null;
@@ -59,17 +57,7 @@ class Modele
         return $this->id;
     }
 
-    public function getReseauxSociaux(): ?string
-    {
-        return $this->reseaux_sociaux;
-    }
 
-    public function setReseauxSociaux(string $reseaux_sociaux): static
-    {
-        $this->reseaux_sociaux = $reseaux_sociaux;
-
-        return $this;
-    }
 
     public function getAgence(): ?string
     {
