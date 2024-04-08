@@ -52,18 +52,20 @@
                                 {% if app.user %}
                             {% if is_granted('ROLE_MODELE') %}
                         <a href={{ url('app_modele_book_modele') }} class="btn btn-outline-success" target="_blank">Book Modèle</a>
+                        <a href='{{ url('app_modele_index') }}' class="btn btn-outline-info">Home</a>   
                            
-                           
-                            {% if is_granted('ROLE_PHOTOGRAPHE') %}
-                        <a href='#' class="btn btn-outline-secondary">Book Photographe</a>
+                        {%else%}
 
+                            {% if is_granted('ROLE_PHOTOGRAPHE') %}
+                        <a href={{ url('app_photographe_book_photographe') }} class="btn btn-outline-success" target="_blank">Book Photographe</a>
+                        <a href='{{ url('app_photographe_index') }}' class="btn btn-outline-info">Home</a>
                             {% endif %}
                             {% endif %}
                             {% endif %}
                                     
                             {% if app.user %}
 
-                        <a href='{{ url('app_modele_index') }}' class="btn btn-outline-info">Home</a>
+                        
                         <a href='{{ url('app_modele_compte') }}' class="btn btn-outline-warning">Compte</a>
                         <a href={{url("app_logout")}} class="btn btn-outline-danger">Déconnexion</a>
   

@@ -53,4 +53,12 @@ class PhotographeController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+
+    #[Route('/book_photographe', name: 'book_photographe')]
+
+    public function book_modele(): Response
+    {
+        return $this->render('photographe/book-photographe.html.twig', []);
+    }
 }
