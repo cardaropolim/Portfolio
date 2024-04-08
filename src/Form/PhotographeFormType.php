@@ -12,7 +12,6 @@ class PhotographeFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('reseaux_sociaux')
             ->add('agence')
             ->add('description')
             ->add('signes_particuliers')

@@ -52,6 +52,8 @@
                                 {% if app.user %}
                             {% if is_granted('ROLE_MODELE') %}
                         <a href={{ url('app_modele_book_modele') }} class="btn btn-outline-success" target="_blank">Book Modèle</a>
+                           
+                           
                             {% if is_granted('ROLE_PHOTOGRAPHE') %}
                         <a href='#' class="btn btn-outline-secondary">Book Photographe</a>
 

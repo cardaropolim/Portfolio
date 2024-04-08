@@ -2,6 +2,34 @@
 
 {% block body %}
 
-<h1>Tarifs</h1>
+<form action="{{ path('app_modele_tarifs_form') }}">
+{# {% if form is defined %}  #}
+   {{ form_start(form) }}  
 
-{% endblock %}    
+   <div id="inputs-container">
+    {{ form_row(form.inputs) }}  {# Affichage des champs du formulaire #}
+   </div> 
+
+  {{ form_end(form) }} 
+
+  <button type="button" id="add-input">Ajouter un champ</button> {# Ajout du bouton pour ajouter dynamiquement des champs #}
+
+</form>
+
+
+
+<script>
+    document.getElementById('add-input').addEventListener('click', function() {
+        var container = document.getElementById('inputs-container');
+        var index = container.querySelectorAll('input').length;
+
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.name = 'your_form[inputs][' + index + ']';
+        input.classList.add('form-control'); // Ajoutez vos classes CSS ici
+
+        container.appendChild(input);
+    });
+</script>
+{# {% endif %}  #}
+{% endblock %} 

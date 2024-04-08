@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Modele;
 use App\Form\ModeleFormType;
+use App\Form\TarifsType;
+use Symfony\Component\Form\FormView;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,9 +32,9 @@ class ModeleController extends AbstractController
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $modele = new Modele();
-        if ($this->getUser()->getModele()) {
-            $modele = $this->getUser()->getModele();
-        }
+            if ($this->getUser()->getModele()) {
+             $modele = $this->getUser()->getModele();
+         }
         $modele->setUser($this->getUser());
         $form = $this->createForm(ModeleFormType::class, $modele);
         $form->handleRequest($request);
@@ -100,5 +102,22 @@ class ModeleController extends AbstractController
     public function compte(): Response
     {
         return $this->render('modele/compte.html.twig', []);
+    }
+
+    #[Route('/tarifs_form', name: 'tarifs_form')]
+    public function tarifs_form(Request $request): Response
+{
+    $form = $this->createForm(TarifsType::class);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $data = $form->getData();
+
+        return $this->redirectToRoute('app_modele_index');
+    }
+
+    return $this->render('modele/tarifs.html.twig', [
+        'form' => $form->createView(), // Assurez-vous de passer la variable form au template Twig
+    ]);
     }
 }

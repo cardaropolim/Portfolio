@@ -85,13 +85,12 @@ class Photographe
 
     public function getUser(): ?User
     {
-        return $this->User;
+        return $this->user;
     }
-
+   
     public function setUser(?User $User): static
     {
-        $this->User = $User;
-
+        $this->user = $User;
         return $this;
     }
 }

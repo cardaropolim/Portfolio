@@ -14,17 +14,17 @@ class ModeleFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('agence')
-            ->add('description')
-            ->add('signes_particuliers')
-            ->add('taille')
-            ->add('taille_hanches')
-            ->add('tour_de_poitrine')
-            ->add('pointure')
-            ->add('poids')
-            ->add('couleur_yeux')
-            ->add('couleur_cheveux')
-            ->add('type_ethnique')
+        ->add('description')
+        ->add('agence')
+        ->add('couleur_yeux')
+        ->add('couleur_cheveux')
+        ->add('taille')
+        ->add('taille_hanches')
+        ->add('tour_de_poitrine')
+        ->add('pointure')
+        ->add('poids')
+        ->add('type_ethnique')
+        ->add('signes_particuliers')
         ;
     }
 

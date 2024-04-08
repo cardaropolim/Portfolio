@@ -17,23 +17,29 @@ class PhotographeController extends AbstractController
     #[Route('/', name: 'index')]
     public function index(): Response
     {
-
-        if (!$this->getUser()->getPhotographe()) {
-            return $this->redirectToRoute('app_photographe_profile');
-        }
+    
+         if (!$this->getUser()->getPhotographe()) {
+             return $this->redirectToRoute('app_photographe_photographe_profile');
+         }
 
         return $this->render('photographe/index.html.twig', [
             'controller_name' => 'PhotographeController',
         ]);
     }
 
-    #[Route('/create-profile', name: 'photographeprofile')]
+    #[Route('/informations-profile', name: 'photographe_profile')]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
+  
         $photographe = new Photographe();
+         if ($this->getUser()->getPhotographe()) {
+             $photographe = $this->getUser()->getPhotographe();
+         }
+
         $photographe->setUser($this->getUser());
         $form = $this->createForm(PhotographeFormType::class, $photographe);
         $form->handleRequest($request);
+
 
 
         if ($form->isSubmitted() && $form->isValid()) {
