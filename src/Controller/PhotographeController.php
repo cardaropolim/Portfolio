@@ -70,7 +70,7 @@ class PhotographeController extends AbstractController
         $tarifsUser = $this->getUser()->getTarifs();
 
         $tarif = new Tarifs();
-        // Créer le formulaire en utilisant le type de formulaire TarifsType et l'entité Modele récupérée
+        // Créer le formulaire en utilisant le type de formulaire TarifsType et l'entité Photographe récupérée
         $form = $this->createForm(TarifType::class, $tarif);
         $form->handleRequest($request);
 

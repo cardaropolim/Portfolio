@@ -3,10 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Modele;
+use App\Entity\Tarifs;
 use App\Form\ModeleFormType;
-use App\Form\TarifsType;
-use App\Repository\ModeleRepository;
-use Symfony\Component\Form\FormView;
+use App\Form\TarifType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -58,32 +57,32 @@ class ModeleController extends AbstractController
         return $this->render('modele/contacts.html.twig', []);
     }
 
-     #[Route('/disponibilites', name: 'disponibilites')]
-     public function disponibilites(): Response
-     {
-         return $this->render('modele/disponibilites.html.twig', []);
+    //  #[Route('/disponibilites', name: 'disponibilites')]
+    //  public function disponibilites(): Response
+    //  {
+    //      return $this->render('modele/disponibilites.html.twig', []);
 
-     }
-    #[Route('/mobilite', name: 'mobilite')]
+    //  }
+    // #[Route('/mobilite', name: 'mobilite')]
 
-    public function mobilite(): Response
-    {
-        return $this->render('modele/mobilite.html.twig', []);
-    }
+    // public function mobilite(): Response
+    // {
+    //     return $this->render('modele/mobilite.html.twig', []);
+    // }
 
 
-    #[Route('/reseaux_sociaux', name: 'reseaux_sociaux')]
+    // #[Route('/reseaux_sociaux', name: 'reseaux_sociaux')]
 
-    public function reseaux_sociaux(): Response
-    {
-        return $this->render('modele/reseaux-sociaux.html.twig', []);
-    }
-    #[Route('/statistiques', name: 'statistiques')]
+    // public function reseaux_sociaux(): Response
+    // {
+    //     return $this->render('modele/reseaux-sociaux.html.twig', []);
+    // }
+    // #[Route('/statistiques', name: 'statistiques')]
 
-    public function statistiques(): Response
-    {
-        return $this->render('modele/statistiques.html.twig', []);
-    }
+    // public function statistiques(): Response
+    // {
+    //     return $this->render('modele/statistiques.html.twig', []);
+    // }
 
     #[Route('/book_modele', name: 'book_modele')]
 
@@ -100,71 +99,29 @@ class ModeleController extends AbstractController
 
 
     #[Route('/tarifs', name: 'tarifs_form')]
-    public function tarifs_form(Request $request, EntityManagerInterface $entityManager, ModeleRepository $model): Response
+    public function tarifs_form(Request $request, EntityManagerInterface $entityManager): Response
     {
-    // // // // Création d'une nouvelle instance de Modele
-    //   $builder = $entityManager->createQueryBuilder();
-    
-     // Récupérer l'ID de l'utilisateur connecté
-     $connectedUserId = $this->getUser()->getId();
+        $tarifsUser = $this->getUser()->getTarifs();
 
-     
-    //  $query = $builder->select('m')->from
-    //  ('App\Entity\Modele', 'm')->where('m.user = :id')->setParameter
-    //  ('id', $connectedUserId)->getQuery();
+        $tarif = new Tarifs();
+        // Créer le formulaire en utilisant le type de formulaire TarifsType et l'entité Modele récupérée
+        $form = $this->createForm(TarifType::class, $tarif);
+        $form->handleRequest($request);
 
-    //  $results = $query->getResult();
-    //  $currentUser = !empty($results) ? $results[0] : null;
+        if ($form->isSubmitted() && $form->isValid()) {
+            $tarif->setUser($this->getUser());
+            $entityManager->persist($tarif);
+            $entityManager->flush();
 
-    
-
-     // Récupérer l'entité Modele pour l'utilisateur connecté
-     $currentUser = $model->findOneBy(['user' => $connectedUserId]);
-
-     // Si aucune entité Modele n'est trouvée, créer une nouvelle instance
-    if (!$currentUser) {
-        $currentUser = new Modele();
-        $currentUser->setUser($this->getUser());
-    }
-
-    // Créer le formulaire en utilisant le type de formulaire TarifsType et l'entité Modele récupérée
-    $form = $this->createForm(TarifsType::class, $currentUser);
-    $form->handleRequest($request);
-
-    // $form->getErrors(true);
-
-    if ($form->isSubmitted() && $form->isValid()) {
-       
-        // Récupération des données du formulaire
-        $inputs = $form->get('inputs')->getData();
-
-        // Ajout des inputs au modèle
-        foreach ($inputs as $input) {
-            $currentUser->addInput($input);
+            // Rediriger vers la page d'accueil ou toute autre page appropriée
+            return $this->redirectToRoute('app_modele_index');
         }
 
-        // Récupération des inputs à supprimer
-        $removedInputs = $form->get('removedInputs')->getData();
-        foreach ($removedInputs as $removedInput) {
-            $currentUser->removeInput($removedInput);
-            }
-
-        // Persistez et sauvegardez le modèle dans la base de données
-        $entityManager->persist($currentUser);
-        $entityManager->flush();
-
-       
-
-        // Rediriger vers la page d'accueil ou toute autre page appropriée
-        return $this->redirectToRoute('app_modele_index');
+        return $this->render('modele/tarifs.html.twig', [
+            'form' => $form->createView(),
+            'tarifsUser' => $tarifsUser
+        ]);
     }
-
-    return $this->render('modele/tarifs.html.twig', [
-        'form' => $form->createView(),
-    ]);
-
-    
-}
 
 
 }

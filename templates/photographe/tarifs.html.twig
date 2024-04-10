@@ -13,45 +13,16 @@
     <p>{{tarif.prestations}} - à {{tarif.prix}}€</p>
     {% endfor %}
     </div>
+	
 <script>
 		// Ajoute un nouveau champ input
-const form = document.getElementById('tarifForm');
-document.getElementById('add-input').addEventListener('click', function () {
-console.log(form)
-const cloneForm = form.cloneNode(true);
-document.getElementById('forms').appendChild(cloneForm);
-});
-// var container = document.getElementById('inputs-container');
-// var index = container.querySelectorAll('input').length;
+	const form = document.getElementById('tarifForm');
+	document.getElementById('add-input').addEventListener('click', function () {
+	console.log(form)
+	const cloneForm = form.cloneNode(true);
+	document.getElementById('forms').appendChild(cloneForm);
+	});
 
-// var inputGroup = document.createElement('div');
-// inputGroup.classList.add('input-group', 'mb-3');
-
-// var input = document.createElement('input');
-// input.type = 'text';
-// input.name = 'your_form[inputs][' + index + ']';
-// input.classList.add('form-control');
-
-// var removeButton = document.createElement('button');
-// removeButton.type = 'button';
-// removeButton.classList.add('btn', 'btn-danger', 'remove-input');
-// removeButton.textContent = 'Supprimer';
-
-// removeButton.addEventListener('click', function() {
-//     inputGroup.remove(); // Supprime le champ input lorsque le bouton Supprimer est cliqué
-// });
-
-// inputGroup.appendChild(input);
-// inputGroup.appendChild(removeButton);
-// container.appendChild(inputGroup);
-// });
-
-// Supprime un champ input existant
-// document.querySelectorAll('.remove-input').forEach(function (button) {
-// button.addEventListener('click', function () {
-// button.parentElement.remove(); // Supprime le champ input associé lorsque le bouton Supprimer est cliqué
-// });
-// });
-	</script>
+</script>
 
 {% endblock %}
