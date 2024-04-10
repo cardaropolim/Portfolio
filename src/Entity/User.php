@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -38,6 +40,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?Modele $modele = null;
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
     private ?Photographe $photographe = null;
+
+    #[ORM\OneToMany(targetEntity: Tarifs::class, mappedBy: 'user')]
+    private Collection $tarifs;
+
+    public function __construct()
+    {
+        $this->tarifs = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -144,6 +154,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->modele = $photographe;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tarifs>
+     */
+    public function getTarifs(): Collection
+    {
+        return $this->tarifs;
+    }
+
+    public function addTarif(Tarifs $tarif): static
+    {
+        if (!$this->tarifs->contains($tarif)) {
+            $this->tarifs->add($tarif);
+            $tarif->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTarif(Tarifs $tarif): static
+    {
+        if ($this->tarifs->removeElement($tarif)) {
+            // set the owning side to null (unless already changed)
+            if ($tarif->getUser() === $this) {
+                $tarif->setUser(null);
+            }
+        }
 
         return $this;
     }

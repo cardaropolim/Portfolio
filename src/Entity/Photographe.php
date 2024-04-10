@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\PhotographeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,8 +13,8 @@ class Photographe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
-
+     private ?int $id = null; 
+     
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $reseaux_sociaux = null;
 
@@ -30,22 +31,22 @@ class Photographe
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+
+
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getReseauxSociaux(): ?string
-    {
-        return $this->reseaux_sociaux;
-    }
-
-    public function setReseauxSociaux(?string $reseaux_sociaux): static
-    {
-        $this->reseaux_sociaux = $reseaux_sociaux;
-
-        return $this;
-    }
+     public function gxetReseauxSociaux(): ?string
+     {
+         return $this->reseaux_sociaux;
+     }
+     public function setReseauxSociaux(?string $reseaux_sociaux): static
+     {
+         $this->reseaux_sociaux = $reseaux_sociaux;
+         return $this;
+     }
 
     public function getAgence(): ?string
     {
@@ -93,4 +94,6 @@ class Photographe
         $this->user = $User;
         return $this;
     }
+
 }
+

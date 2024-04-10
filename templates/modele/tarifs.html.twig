@@ -2,34 +2,58 @@
 
 {% block body %}
 
-<form action="{{ path('app_modele_tarifs_form') }}">
-{# {% if form is defined %}  #}
+<form action="{{ path('app_modele_tarifs_form') }}" method="post">
    {{ form_start(form) }}  
 
    <div id="inputs-container">
-    {{ form_row(form.inputs) }}  {# Affichage des champs du formulaire #}
-   </div> 
+       {% for inputField in form.inputs %}
+           <div class="input-group mb-3">
+              
+               {{ form_widget(inputField, {'attr': {'class': 'form-control'}}) }}
+               <button type="button" class="btn btn-danger remove-input">Supprimer</button>
+           </div>
+       {% endfor %}
+   </div>
 
-  {{ form_end(form) }} 
-
-  <button type="button" id="add-input">Ajouter un champ</button> {# Ajout du bouton pour ajouter dynamiquement des champs #}
-
+   <button type="button" id="add-input" class="btn btn-primary">Ajouter un champ</button>
+   <button type="submit" class="btn btn-outline-success">Modifier</button>
+   {{ form_end(form) }} 
 </form>
 
-
-
 <script>
+    // Ajoute un nouveau champ input
     document.getElementById('add-input').addEventListener('click', function() {
         var container = document.getElementById('inputs-container');
         var index = container.querySelectorAll('input').length;
 
+        var inputGroup = document.createElement('div');
+        inputGroup.classList.add('input-group', 'mb-3');
+
         var input = document.createElement('input');
         input.type = 'text';
         input.name = 'your_form[inputs][' + index + ']';
-        input.classList.add('form-control'); // Ajoutez vos classes CSS ici
+        input.classList.add('form-control');
 
-        container.appendChild(input);
+        var removeButton = document.createElement('button');
+        removeButton.type = 'button';
+        removeButton.classList.add('btn', 'btn-danger', 'remove-input');
+        removeButton.textContent = 'Supprimer';
+
+        removeButton.addEventListener('click', function() {
+            inputGroup.remove(); // Supprime le champ input lorsque le bouton Supprimer est cliqué
+        });
+
+        inputGroup.appendChild(input);
+        inputGroup.appendChild(removeButton);
+        container.appendChild(inputGroup);
+    });
+
+    // Supprime un champ input existant
+    document.querySelectorAll('.remove-input').forEach(function(button) {
+        button.addEventListener('click', function() {
+            button.parentElement.remove(); // Supprime le champ input associé lorsque le bouton Supprimer est cliqué
+        });
     });
 </script>
-{# {% endif %}  #}
-{% endblock %} 
+
+{% endblock %}

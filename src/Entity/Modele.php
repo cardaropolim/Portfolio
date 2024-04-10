@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ModeleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,7 +14,6 @@ class Modele
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
 
     #[ORM\Column(length: 255)]
     private ?string $agence = null;
@@ -52,12 +52,11 @@ class Modele
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    
     public function getId(): ?int
     {
         return $this->id;
     }
-
-
 
     public function getAgence(): ?string
     {
@@ -67,7 +66,6 @@ class Modele
     public function setAgence(string $agence): static
     {
         $this->agence = $agence;
-
         return $this;
     }
 
@@ -79,7 +77,6 @@ class Modele
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
         return $this;
     }
 
@@ -91,7 +88,6 @@ class Modele
     public function setSignesParticuliers(?string $signes_particuliers): static
     {
         $this->signes_particuliers = $signes_particuliers;
-
         return $this;
     }
 
@@ -103,7 +99,6 @@ class Modele
     public function setTaille(float $taille): static
     {
         $this->taille = $taille;
-
         return $this;
     }
 
@@ -115,7 +110,6 @@ class Modele
     public function setTailleHanches(float $taille_hanches): static
     {
         $this->taille_hanches = $taille_hanches;
-
         return $this;
     }
 
@@ -127,7 +121,6 @@ class Modele
     public function setTourDePoitrine(?float $tour_de_poitrine): static
     {
         $this->tour_de_poitrine = $tour_de_poitrine;
-
         return $this;
     }
 
@@ -139,7 +132,6 @@ class Modele
     public function setPointure(float $pointure): static
     {
         $this->pointure = $pointure;
-
         return $this;
     }
 
@@ -151,7 +143,6 @@ class Modele
     public function setPoids(float $poids): static
     {
         $this->poids = $poids;
-
         return $this;
     }
 
@@ -163,7 +154,6 @@ class Modele
     public function setCouleurYeux(string $couleur_yeux): static
     {
         $this->couleur_yeux = $couleur_yeux;
-
         return $this;
     }
 
@@ -175,7 +165,6 @@ class Modele
     public function setCouleurCheveux(string $couleur_cheveux): static
     {
         $this->couleur_cheveux = $couleur_cheveux;
-
         return $this;
     }
 
@@ -187,7 +176,6 @@ class Modele
     public function setTypeEthnique(string $type_ethnique): static
     {
         $this->type_ethnique = $type_ethnique;
-
         return $this;
     }
 
@@ -199,7 +187,7 @@ class Modele
     public function setUser(User $user): static
     {
         $this->user = $user;
-
         return $this;
     }
+    
 }
