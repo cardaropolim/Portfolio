@@ -1,0 +1,86 @@
+/************************** Base ***************************************/
+
+        .navbar-base {
+            background-color: Thistle;
+            /* opacity: 65%; */
+        }
+
+        body {
+                background-color: beige;    
+        }
+
+/************************** Modele Portfolio ***************************/
+
+        html {
+            scroll-behavior: smooth;
+            }
+
+        h1 {
+            text-align: center;
+            color: darkcyan;
+        }
+
+        .container_modele_index {
+            display: flex;
+            align-items: flex-end;
+        } 
+
+        .example_wrapper_modele_index {
+            height: 50em;
+            background-size: cover;
+            background-position: center center;
+            /* opacity: 0.3; */
+        }
+
+        #Biographie, #Contact, #Bibliotheque, #Head {
+            display: flex; 
+            align-items: center;
+            justify-content: center;        
+            height: 25em;
+            background-color: beige   
+        }
+
+            #Contact {
+            flex-direction: column;
+        }
+
+            .navbar_book_modele {
+            display: flex;
+            justify-content: space-around;
+            background-color: Thistle;
+            word-spacing: 10px;
+        }
+
+            #tarifs_modele {
+            border-collapse: collapse;
+            width: 90%;
+        }
+            #tarifs_photographe {
+                border-collapse: collapse;
+                width: 90%;
+        }
+            th, td {
+                border: 4px groove purple;
+                padding: 5px;
+        }
+            .form_profile { 
+                font-weight: bold;
+        }
+
+ /************************** Modele Photographe ***************************/
+
+        .container_index_photographe {
+            display: flex;
+            align-items: flex-end;
+        } 
+
+        .navbar_book_photographe {
+            display: flex;
+            justify-content: space-around;
+            background-color: Thistle;
+            word-spacing: 10px;
+        }
+
+        .form_photographe_profile { 
+            font-weight: bold;
+        }

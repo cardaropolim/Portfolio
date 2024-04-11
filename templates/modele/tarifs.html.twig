@@ -1,19 +1,45 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Ajout Tarifs{% endblock %}
+
 {% block body %}
+
+    {% block form_row %}        
+
+
 	{{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}
-	<button type="submit" class="btn btn-outline-success">Ajouter le tarif</button>
+     {{ form_widget(form) }}
+
+    
+
+	<button type="submit" class="btn btn-outline-success">Sauvegarder</button>
+
+    {% endblock form_row %}
 	{{ form_end(form) }}
 	<button type="button" id="add-input" class="btn btn-primary">Ajouter un tarif</button>
 
 	<div id="forms"></div>
 
     <div id="list-tarifs">
-    {% for tarif in tarifsUser %}
-    <p>{{tarif.prestations}} - à {{tarif.prix}}€</p>
-    {% endfor %}
+<table id="tarifs_modele">
+    <thead>
+	<br>
+        <tr>
+            <th>Prestations</th>
+            <th>Prix</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for tarif in tarifsUser %}
+            <tr>
+                <td>{{ tarif.prestations }}</td>
+                <td>{{ tarif.prix }}€</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
     </div>
-	
+
 <script>
 		// Ajoute un nouveau champ input
 	const form = document.getElementById('tarifForm');
@@ -26,4 +52,3 @@
 </script>
 
 {% endblock %}
-    
