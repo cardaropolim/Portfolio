@@ -6,8 +6,14 @@
 
     {% block form_row %}        
 
+	 {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
 
-	{{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}
+    <label for="{{ form.prestations.vars.id }}" class="form_prestations">Prestation</label>
+    {{ form_widget(form.prestations, {'attr': {'id': 'tarifForm'}}) }}
+
+     <label for="{{ form.prix.vars.id }}" class="form_prix">Prix</label>
+    {{ form_widget(form.prix, {'attr': {'id': 'tarifForm'}}) }}
+
      {{ form_widget(form) }}
 
     
@@ -15,7 +21,7 @@
 	<button type="submit" class="btn btn-outline-success">Sauvegarder</button>
 
     {% endblock form_row %}
-	{{ form_end(form) }}
+	{{ form_end(form) }} 
 	<button type="button" id="add-input" class="btn btn-primary">Ajouter un tarif</button>
 
 	<div id="forms"></div>

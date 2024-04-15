@@ -44,9 +44,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Tarifs::class, mappedBy: 'user')]
     private Collection $tarifs;
 
+    #[ORM\OneToMany(targetEntity: Media::class, mappedBy: 'user')]
+    private Collection $media;
+
     public function __construct()
     {
         $this->tarifs = new ArrayCollection();
+        $this->media = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,6 +186,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($tarif->getUser() === $this) {
                 $tarif->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Media>
+     */
+    public function getMedia(): Collection
+    {
+        return $this->media;
+    }
+
+    public function addMedium(Media $medium): static
+    {
+        if (!$this->media->contains($medium)) {
+            $this->media->add($medium);
+            $medium->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedium(Media $medium): static
+    {
+        if ($this->media->removeElement($medium)) {
+            // set the owning side to null (unless already changed)
+            if ($medium->getUser() === $this) {
+                $medium->setUser(null);
             }
         }
 

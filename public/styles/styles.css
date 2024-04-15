@@ -67,6 +67,18 @@
                 font-weight: bold;
         }
 
+            .form_prestations {
+                color:darkmagenta;  
+                font-weight: bold;
+        }
+
+            .form_prix {
+                color:darkmagenta;
+                font-weight: bold;
+        }
+
+
+
  /************************** Modele Photographe ***************************/
 
         .container_index_photographe {
