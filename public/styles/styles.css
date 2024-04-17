@@ -9,6 +9,113 @@
                 background-color: beige;    
         }
 
+/************* Style du menu hamburger pour les écrans de petite taille */
+
+        .menu-hamburger {
+            display: none;
+            position: absolute;
+            /* width: 4vw; */
+            right: 5%;
+            top: 0%;
+            cursor:grab;
+    }
+
+            /* Style des liens de navigation */
+        .navbar .nav-links ul {
+            display: flex;
+            margin-left: 25px;
+            font-size: larger;
+            text-decoration:none;
+            
+        }
+
+        .navbar .nav-links ul li {
+            display: flex;
+            margin-left: 25px;
+            font-size: larger;
+            text-decoration:none;
+          
+        }
+
+
+    @media screen and (max-width: 900px) {
+
+         .menu-hamburger {
+            display: block;
+           
+        }
+
+        .nav-links  {
+            top: 0;
+            left: 0;
+            position: absolute;
+            background-color: rgba(96, 92, 92, 0.254);
+            backdrop-filter: blur(20px);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-left: -100%;
+            transition: fadeIn 5s;   
+        }
+    
+        .nav-links.mobile-menu {
+            margin-left: 0;
+        }
+    
+        .nav-links ul {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .navbar-base .nav-links ul li {
+            margin: 25px 0;
+            font-size: 1.5em;
+        }
+    
+
+    }
+
+    /* Style pour le menu mobile */
+         .mobile-menu {
+            display: flex !important; /* Affichez le menu mobile */
+         }
+
+/************************ scrollTopButton ****************************/
+
+        #scrollToTopButton {
+            display: block;
+            z-index: 99;
+            opacity: 0;
+            visibility: hidden;
+            position: fixed;
+            bottom: 20px;
+            right: 30px;
+            border: none;
+            border-radius: 4px;
+            outline: none;
+            width: 50px;
+            height: 50px;
+            padding: 8px;
+            background-color: rgb(83, 107, 166);
+        }
+
+/******************* bouton scroll haut de page **************************/
+
+
+                #scrollToTopButton i {
+                    color: rgb(118, 36, 36);
+            }
+                #scrollToTopButton:hover,
+                #scrollToTopButton:focus,
+                #scrollToTopButton:focus-within {
+                    cursor: pointer;
+                    background-color: #27812e;
+            }
+
+
 /************************** Modele Portfolio ***************************/
 
         html {
@@ -20,10 +127,10 @@
             color: darkcyan;
         }
 
-        .container_modele_index {
-            display: flex;
+         .container_modele_index {
+             display: flex;
             align-items: flex-end;
-        } 
+        }
 
         .example_wrapper_modele_index {
             height: 50em;
@@ -76,8 +183,6 @@
                 color:darkmagenta;
                 font-weight: bold;
         }
-
-
 
  /************************** Modele Photographe ***************************/
 

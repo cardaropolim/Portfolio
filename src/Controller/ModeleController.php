@@ -2,14 +2,14 @@
 
 namespace App\Controller;
 
+// use App\Repository\ModeleRepository;
+// use App\Repository\UserRepository;
 use App\Entity\Media;
 use App\Entity\Modele;
 use App\Entity\Tarifs;
 use App\Form\MediaType;
 use App\Form\ModeleFormType;
 use App\Form\TarifType;
-use App\Repository\ModeleRepository;
-use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
