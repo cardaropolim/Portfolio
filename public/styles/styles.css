@@ -1,22 +1,22 @@
 /************************** Base ***************************************/
 
         .navbar-base {
-            background-color: Thistle;
+            background-color: rgba(2, 1, 1, 0.614);
             /* opacity: 65%; */
         }
 
         body {
                 background-color: beige;    
+                height: auto;
         }
 
 /************* Style du menu hamburger pour les écrans de petite taille */
 
-        .menu-hamburger {
+      .menu-hamburger {
             display: none;
             position: absolute;
-            /* width: 4vw; */
             right: 5%;
-            top: 0%;
+            top: 7%;
             cursor:grab;
     }
 
@@ -25,62 +25,89 @@
             display: flex;
             margin-left: 25px;
             font-size: larger;
-            text-decoration:none;
-            
+
         }
 
         .navbar .nav-links ul li {
             display: flex;
             margin-left: 25px;
             font-size: larger;
-            text-decoration:none;
-          
+
         }
 
+        .navbar .nav-links ul li:hover {
+            background-color: rgb(144, 189, 207);
+            cursor: grab;
+        }
 
-    @media screen and (max-width: 900px) {
-
-         .menu-hamburger {
-            display: block;
+        .row.py-3 {
            
+            display: flex;
+            flex-wrap: nowrap;
         }
 
+
+    @media screen and (max-width: 999px) {
+
+      .menu-hamburger {
+            display: block;
+        }
+
+        .hidden {
+            z-index: -1;
+        }
+ 
+        .navbar {
+            justify-content: center;
+       
+        } 
+  
         .nav-links  {
+            padding-top: 10em;
             top: 0;
             left: 0;
+            display: block;
             position: absolute;
-            background-color: rgba(96, 92, 92, 0.254);
+            background-color: rgba(99, 68, 102, 0.254);
             backdrop-filter: blur(20px);
             width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
+            height: 200vh;
             align-items: center;
+            flex-direction: column;
             margin-left: -100%;
-            transition: fadeIn 5s;   
+            transition: fadeIn 5s;
+            justify-content: center;
         }
-    
+
+         .nav-links li {
+        width: 100em;
+        justify-content: center;
+            align-items: center;
+        }
+     
         .nav-links.mobile-menu {
             margin-left: 0;
+
         }
     
         .nav-links ul {
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            
         }
     
         .navbar-base .nav-links ul li {
             margin: 25px 0;
             font-size: 1.5em;
+     
         }
-    
-
     }
 
     /* Style pour le menu mobile */
          .mobile-menu {
-            display: flex !important; /* Affichez le menu mobile */
+            margin-left: 0%;
          }
 
 /************************ scrollTopButton ****************************/
@@ -130,10 +157,11 @@
          .container_modele_index {
              display: flex;
             align-items: flex-end;
+        
         }
 
         .example_wrapper_modele_index {
-            height: 50em;
+            height: 45em;
             background-size: cover;
             background-position: center center;
             /* opacity: 0.3; */

@@ -3,6 +3,8 @@
 // Sélectionnez l'élément du menu hamburger en utilisant un sélecteur plus spécifique (si nécessaire)
 const menuHamburger = document.querySelector(".menu-hamburger");
 
+const linksModele = document.querySelector("#links-modele")
+
 // Sélectionnez également le conteneur des liens de navigation
 const navLinks = document.querySelector(".nav-links");
 
@@ -12,7 +14,15 @@ console.log("menuHamburger :", menuHamburger); // Vérification de la sélection
 menuHamburger.addEventListener('click', () => {
     // Basculez la classe 'mobile-menu' sur le conteneur du menu mobile
     navLinks.classList.toggle('mobile-menu');
-});
+
+    if (navLinks.classList.contains('mobile-menu')) {
+        linksModele.classList.add('hidden')  
+
+    }else{
+        linksModele.classList.remove('hidden')
+   
+    };
+})
 
 // Ajoutez un écouteur d'événement au redimensionnement de la fenêtre
 window.addEventListener('resize', () => {
@@ -21,7 +31,7 @@ window.addEventListener('resize', () => {
         navLinks.classList.remove('mobile-menu');
     }
 });
-
+console.log(menuHamburger);
 // Scroll to Top Button
 
 // execute la fonction lorsque la fenêtre est scrollée
@@ -46,3 +56,4 @@ function topFunction() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
 }
+

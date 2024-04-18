@@ -6,6 +6,7 @@ use App\Entity\Media;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,7 +35,15 @@ class MediaType extends AbstractType
                     ])
                 ]
             ])
-            ->add('destination')
+            // ->add('destination')
+            ->add('destination', ChoiceType::class, [
+                'choices' => [
+                    'Section 1 - page d\'Accueil BOOK' => 'section1',
+                    'Section 2 - page d\'Accueil BOOK' => 'section2',
+                    'Section 3 - page d\'Accueil BOOK' => 'section3',
+                    'Section 4 - page d\'Accueil BOOK' => 'section4',
+                ]
+                ])
             ->add('description')
             // ->add('user', EntityType::class, [
             //     'class' => User::class,
