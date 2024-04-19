@@ -161,30 +161,6 @@
             width: 90%;
         }
 
-        #tarifs_photographe {
-            border-collapse: collapse;
-            width: 90%;
-        }
-
-        th, td {
-            border: 4px groove purple;
-            padding: 5px;
-        }
-
-        .form_profile { 
-            font-weight: bold;
-        }
-
-        .form_prestations {
-            color: darkmagenta;  
-            font-weight: bold;
-        }
-
-        .form_prix {
-            color: darkmagenta;
-            font-weight: bold;
-        }
-
 /************************** Modele Photographe ***************************/
 
 /* Styles spécifiques pour le modèle Photographe */
@@ -210,6 +186,33 @@
             background-size: cover;
             background-position: center center;
         }
+
+        #tarifs_photographe {
+            border-collapse: collapse;
+            width: 90%;
+        }
+
+/******************************** Forms *******************************/
+
+        th, td {
+            border: 4px groove purple;
+            padding: 5px;
+        }
+
+        .form_profile { 
+            font-weight: bold;
+        }
+
+        .form_prestations {
+            color: darkmagenta;  
+            font-weight: bold;
+        }
+
+        .form_prix {
+            color: darkmagenta;
+            font-weight: bold;
+        }
+
 
 /************************ scrollTopButton ****************************/
 

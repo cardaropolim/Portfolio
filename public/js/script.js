@@ -5,6 +5,9 @@ const menuHamburger = document.querySelector(".menu-hamburger");
 
 const linksModele = document.querySelector("#links-modele")
 
+const linksPhotographe = document.querySelector("#links-photographe")
+
+
 // Sélectionnez également le conteneur des liens de navigation
 const navLinks = document.querySelector(".nav-links");
 
@@ -16,13 +19,22 @@ menuHamburger.addEventListener('click', () => {
     navLinks.classList.toggle('mobile-menu');
 
     if (navLinks.classList.contains('mobile-menu')) {
-        linksModele.classList.add('hidden')  
+        if (isModele) {
+            linksModele.classList.add('hidden');
+        }
+        if (isPhotographe) {
+            linksPhotographe.classList.add('hidden');
+        }
+    } else {
+        if (isModele) {
+            linksModele.classList.remove('hidden');
+        }
+        if (isPhotographe) {
+            linksPhotographe.classList.remove('hidden');
+        }
+    }
+});
 
-    }else{
-        linksModele.classList.remove('hidden')
-   
-    };
-})
 
 // Ajoutez un écouteur d'événement au redimensionnement de la fenêtre
 window.addEventListener('resize', () => {

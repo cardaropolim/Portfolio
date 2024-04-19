@@ -5,6 +5,12 @@
 {% block body %}
 
 
+<script>
+    /* Valeur true ou false selon le rôle */;
+    var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+    var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
+</script>
+
 <div class="example_wrapper_modele_index" style='background-image:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url({{ asset('images/apn.png' )  }})'>
     <h1>Bienvenue sur Modèle Portfolio</h1> 
 
