@@ -36,9 +36,9 @@ class ModeleController extends AbstractController
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
         $modele = new Modele();
-            if ($this->getUser()->getModele()) {
-             $modele = $this->getUser()->getModele();
-         }
+        if ($this->getUser()->getModele()) {
+            $modele = $this->getUser()->getModele();
+        }
         $modele->setUser($this->getUser());
         $form = $this->createForm(ModeleFormType::class, $modele);
         $form->handleRequest($request);
@@ -48,7 +48,6 @@ class ModeleController extends AbstractController
             $entityManager->flush();
 
             return $this->redirectToRoute('app_modele_index');
-            
         }
         return $this->render('modele/profile-form.html.twig', [
             'form' => $form->createView(),
@@ -92,7 +91,9 @@ class ModeleController extends AbstractController
 
     public function book_modele(): Response
     {
-        return $this->render('modele/book-modele.html.twig', []);
+        return $this->render('modele/book-modele.html.twig', [
+            'user' => $this->getUser()
+        ]);
     }
 
     #[Route('/compte', name: 'compte')]
@@ -132,45 +133,68 @@ class ModeleController extends AbstractController
     {
         // Récupérer l'utilisateur connecté
         $user = $this->getUser();
-    
+
         // Vérifier si l'utilisateur est un modèle et récupérer son modèle
         $modele = $user->getModele();
-    
+
         // Vérifier si le modèle existe
         if (!$modele) {
             // Rediriger vers la page de création de profil de modèle s'il n'existe pas
             return $this->redirectToRoute('app_modele_modeleprofile');
         }
-    
+
+        $medias = $this->getUser()->getMedia();
+
+        $sections = [];
+        foreach ($medias as $media) {
+            $sections[] = $media->getDestination();
+        }
+
         $media = new Media();
-    
+
         $form = $this->createForm(MediaType::class, $media);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
+            foreach ($sections as $section) {
+                //dd($section, $media->getDestination());
+                if ($media->getDestination() === $section) {
+                    $this->addFlash(
+                        'danger',
+                        'Section already in use'
+                    );
+                    return $this->render('modele/media_create.html.twig', [
+                        'form' => $form->createView(),
+                        'modele' => $modele,
+                    ]);
+                }
+            }
+
+
+
             $files = $form->get('nom')->getData();
+
             $nbMedias = count($user->getMedia());
-    
-            $file_name = date('Y-d-d-H-i-s') . '-' . $media->getNom() . ($nbMedias + 1) . '.' . $files->getClientOriginalExtension();
-    
+
+            $file_name = date('Y-d-d-H-i-s') . '-' . ($nbMedias + 1) . '.' . $files->getClientOriginalExtension();
+
             $files->move($this->getParameter('upload_dir'), $file_name);
-    
+
+            // traitement des images / sections 
+
             $media->setNom($file_name);
-            $media->setNom($media->getNom() . ($nbMedias));
-    
+
             $manager->persist($media);
             $user->addMedium($media);
             $manager->persist($user);
             $manager->flush();
-    
+
             $this->addFlash('success', 'Média créé, vous pouvez en ajouter un autre et valider ou cliquer sur terminé pour voir le détail');
         }
-    
+
         return $this->render('modele/media_create.html.twig', [
             'form' => $form->createView(),
             'modele' => $modele,
         ]);
     }
-    
-
 }

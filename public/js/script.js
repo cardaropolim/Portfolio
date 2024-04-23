@@ -44,6 +44,8 @@ window.addEventListener('resize', () => {
     }
 });
 console.log(menuHamburger);
+
+
 // Scroll to Top Button
 
 // execute la fonction lorsque la fenêtre est scrollée
