@@ -27,6 +27,9 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'media')]
     private ?User $user = null;
 
+    #[ORM\ManyToOne(inversedBy: 'medias', cascade: ['persist', 'remove'])]
+    private ?Gallerie $gallerie = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -76,6 +79,18 @@ class Media
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getGallerie(): ?Gallerie
+    {
+        return $this->gallerie;
+    }
+
+    public function setGallerie(?Gallerie $gallerie): static
+    {
+        $this->gallerie = $gallerie;
 
         return $this;
     }
