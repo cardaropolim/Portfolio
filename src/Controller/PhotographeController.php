@@ -96,43 +96,43 @@ class PhotographeController extends AbstractController
     {
         // Récupérer l'utilisateur connecté
         $user = $this->getUser();
-    
+
         // Vérifier si l'utilisateur est un modèle et récupérer son modèle
         $photographe = $user->getPhotographe();
-    
+
         // Vérifier si le modèle existe
         if (!$photographe) {
             // Rediriger vers la page de création de profil de modèle s'il n'existe pas
             return $this->redirectToRoute('app_photographe_photographe_profile');
         }
-    
+
         $media = new Media();
-    
+
         $form = $this->createForm(MediaType::class, $media);
         $form->handleRequest($request);
-    
+
         if ($form->isSubmitted() && $form->isValid()) {
             $files = $form->get('nom')->getData();
             $nbMedias = count($user->getMedia());
-    
+
             $file_name = date('Y-d-d-H-i-s') . '-' . $media->getNom() . ($nbMedias + 1) . '.' . $files->getClientOriginalExtension();
-    
+
             $files->move($this->getParameter('upload_dir'), $file_name);
-    
+
             $media->setNom($file_name);
             $media->setNom($media->getNom() . ($nbMedias));
-    
+
             $manager->persist($media);
             $user->addMedium($media);
             $manager->persist($user);
             $manager->flush();
-    
+
             $this->addFlash('success', 'Média créé, vous pouvez en ajouter un autre et valider ou cliquer sur terminé pour voir le détail');
         }
-    
+
         return $this->render('photographe/media_create.html.twig', [
             'form' => $form->createView(),
             'photographe' => $photographe,
         ]);
-}
+    }
 }

@@ -3,8 +3,9 @@
 {% block body %}
 
 
-  {{ form(form) }}
+  {{ form(form, {'turbo': true}) }}
   <img id="image" width="300" alt=""><br>
+
 
   <script>
     var loadFile = function (event) {
@@ -17,4 +18,3 @@
 
   </script>
 {% endblock %}
-

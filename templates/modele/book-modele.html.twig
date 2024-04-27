@@ -1,61 +1,91 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8">
-		<title>
-			{% block title %}Book Modele!
-			{% endblock %}
-		</title>
-		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22></text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" integrity="sha512-b2QcS5SsA8tZodcDtGRELiGv5SaKSk1vDHDaQRda0htPYWZ6046lr3kJ5bAAQdpV2mmA/4v0wQF9MyU6/pDIAg==" crossorigin="anonymous" referrerpolicy="no-referrer"/>
+{% extends "basebook.html.twig" %}
 
-		{% block stylesheets %}
-			<link rel="stylesheet" href="{{asset('styles/styles.css')}}">
-		{% endblock %}
+{% block title %}Book!
+{% endblock %}
 
-		{% block javascripts %}
-			{% block importmap %}
-				{{ importmap('app') }}
-			{% endblock %}  
-		{% endblock %}
-	</head>
+{% block body %}
 
-	{% block body %}
-		<nav class="navbar_book_modele">
-			<div class="nav-links">
+	<script>
+		/* Valeur true ou false selon le rôle */;
+var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
+	</script>
 
-				<a href="#Biographie" style="text-decoration:none">Biographie</a>
-				<a href="#Bibliotheque" style="text-decoration:none">Bibliothèque</a>
-				<a href="#Contact" style="text-decoration:none">Contact</a>
+	{# {% for media in user.media %}
+		{% set destination1 = media.destination %}
+		{% set destination2 = media.destination %}
+		{% set destination3 = media.destination %}
+		{% set destination4 = media.destination %}
 
-			</div>
-		</nav>
-	
-		{% for media in user.media %}
+		<section class="Head" id="{{ destination1 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; background-position: center;">
+			 <section class="Head">A
+			{% if destination1 == "section1" %}
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+			{% endif %}
+			  </section>
 
-			<section id="Biographie">
-				{% if media.destination == "section1" %}
-					<img src="{{asset('upload/' ~ media.nom)}}" alt="une image ici">
-				{% endif %}
-			</section>
+			  <section class="Biographie" id="{{ destination2 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; ">
+			{% if destination2 == "section2" %}
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+			{% endif %}
+			  </section>
 
-			<section id="Bibliotheque">
-				{% if media.destination == "section2" %}
-					<img src="{{asset('upload/' ~ media.nom)}}" alt="une image ici">
-				{% endif %}
-			</section>
-
-			<section id="Contact">
-
+			<section class="Bibliotheque" id="{{ destination3 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; ">
+			{% if destination3 == "section3" %}
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+			{% endif %}
+			  </section>
+			  
+			<section class="Contact" id="{{ destination4 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover;">
+			{% if destination4 == "section4" %}
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
 				<p>
 					<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
 				</p>
 				<p>
 					<a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
 				</p>
+			{% endif %}
+			  
+		</section>
+	{% endfor %}
+
+{% endblock %} #}
 
 
-			</section>
-		{% endfor %}
-	{% endblock %}
-</html>
+        {% for media in user.media %}
+			{# {% set destination = media.destination %} #}
+
+            <section id="Head">
+                {% if media.destination == "section1" %}
+                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
+                {% endif %}
+            </section>
+
+            <section id="Biographie">
+                {% if media.destination == "section2" %}
+                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
+                {% endif %}
+            </section>
+
+            <section id="Bibliotheque">
+                {% if media.destination == "section3" %}
+                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
+                {% endif %}
+            </section>
+
+            <section id="Contact">
+                {% if media.destination == "section4" %}
+                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
+                <p>
+                    <a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
+                </p>
+                <p>
+                    <a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
+                </p>
+
+                {% endif %}
+            </section>
+
+         {% endfor %} 
+    {% endblock %} 

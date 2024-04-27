@@ -53,6 +53,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->media = new ArrayCollection();
     }
 
+
     public function getId(): ?int
     {
         return $this->id;
@@ -133,7 +134,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->modele;
     }
 
-    public function setModele(Modele $modele): static
+    public function setModele(Modele $modele): self
     {
         // set the owning side of the relation if necessary
         if ($modele->getUser() !== $this) {
@@ -157,7 +158,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             $photographe->setUser($this);
         }
 
-        $this->modele = $photographe;
+        $this->photographe = $photographe;
 
         return $this;
     }
@@ -221,7 +222,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
-
-
 }

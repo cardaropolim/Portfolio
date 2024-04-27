@@ -18,19 +18,19 @@ class MediaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', FileType::class,[
-                'required'=> false,
-                'label'=>'Fichier photo en liens avec le produit',
-                'attr'=>[
-                    'onChange'=>'loadFile(event)'
+            ->add('nom', FileType::class, [
+                'required' => false,
+                'label' => 'Fichier photo en liens avec le produit',
+                'attr' => [
+                    'onChange' => 'loadFile(event)'
 
                 ],
-                'constraints'=>[
+                'constraints' => [
                     new File([
-                        'maxSize'=>'6000k', 
-                        'maxSizeMessage'=>'Fichier trop volumineux, 6Mo maximum',
-                        'mimeTypes'=>['image/jpg', 'image/jpeg', 'image/png', 'image/webp'],
-                        'mimeTypesMessage'=>"Formats autorisés: 'image/jpg', 'image/jpeg', 'image/png', 'image/webp' "
+                        'maxSize' => '6000k',
+                        'maxSizeMessage' => 'Fichier trop volumineux, 6Mo maximum',
+                        'mimeTypes' => ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'],
+                        'mimeTypesMessage' => "Formats autorisés: 'image/jpg', 'image/jpeg', 'image/png', 'image/webp' "
 
                     ])
                 ]
@@ -43,14 +43,13 @@ class MediaType extends AbstractType
                     'Section 3 - page d\'Accueil BOOK' => 'section3',
                     'Section 4 - page d\'Accueil BOOK' => 'section4',
                 ]
-                ])
+            ])
             ->add('description')
             // ->add('user', EntityType::class, [
             //     'class' => User::class,
             //     'choice_label' => 'id',
             // ])
-            ->add('Ajouter', SubmitType::class)
-        ;
+            ->add('Ajouter', SubmitType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

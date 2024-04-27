@@ -12,8 +12,8 @@ class Photographe
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-     private ?int $id = null; 
-     
+    private ?int $id = null;
+
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $reseaux_sociaux = null;
 
@@ -37,15 +37,15 @@ class Photographe
         return $this->id;
     }
 
-     public function gxetReseauxSociaux(): ?string
-     {
-         return $this->reseaux_sociaux;
-     }
-     public function setReseauxSociaux(?string $reseaux_sociaux): static
-     {
-         $this->reseaux_sociaux = $reseaux_sociaux;
-         return $this;
-     }
+    public function gxetReseauxSociaux(): ?string
+    {
+        return $this->reseaux_sociaux;
+    }
+    public function setReseauxSociaux(?string $reseaux_sociaux): static
+    {
+        $this->reseaux_sociaux = $reseaux_sociaux;
+        return $this;
+    }
 
     public function getAgence(): ?string
     {
@@ -87,12 +87,10 @@ class Photographe
     {
         return $this->user;
     }
-   
+
     public function setUser(?User $User): static
     {
         $this->user = $User;
         return $this;
     }
-
 }
-

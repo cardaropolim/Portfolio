@@ -13,8 +13,7 @@ class TarifType extends AbstractType
     {
         $builder
             ->add('prestations')
-            ->add('prix')
-        ;
+            ->add('prix');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

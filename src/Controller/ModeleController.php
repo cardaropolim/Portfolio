@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-// use App\Repository\ModeleRepository;
-// use App\Repository\UserRepository;
+
 use App\Entity\Media;
 use App\Entity\Modele;
 use App\Entity\Tarifs;
+
 use App\Form\MediaType;
 use App\Form\ModeleFormType;
 use App\Form\TarifType;
@@ -32,6 +32,7 @@ class ModeleController extends AbstractController
         ]);
     }
 
+    // fonction pour fill, récupérer, modifier informations modèle //
     #[Route('/informations-profile', name: 'modeleprofile')]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -60,49 +61,22 @@ class ModeleController extends AbstractController
         return $this->render('modele/contacts.html.twig', []);
     }
 
-    //  #[Route('/disponibilites', name: 'disponibilites')]
-    //  public function disponibilites(): Response
-    //  {
-    //      return $this->render('modele/disponibilites.html.twig', []);
-
-    //  }
-    // #[Route('/mobilite', name: 'mobilite')]
-
-    // public function mobilite(): Response
-    // {
-    //     return $this->render('modele/mobilite.html.twig', []);
-    // }
-
-
-    // #[Route('/reseaux_sociaux', name: 'reseaux_sociaux')]
-
-    // public function reseaux_sociaux(): Response
-    // {
-    //     return $this->render('modele/reseaux-sociaux.html.twig', []);
-    // }
-    // #[Route('/statistiques', name: 'statistiques')]
-
-    // public function statistiques(): Response
-    // {
-    //     return $this->render('modele/statistiques.html.twig', []);
-    // }
-
-    #[Route('/book_modele', name: 'book_modele')]
-
-    public function book_modele(): Response
-    {
-        return $this->render('modele/book-modele.html.twig', [
-            'user' => $this->getUser()
-        ]);
-    }
-
+    // not in used for now //
     #[Route('/compte', name: 'compte')]
     public function compte(): Response
     {
         return $this->render('modele/compte.html.twig', []);
     }
 
-
+    // route book modele //
+    #[Route('/book_modele', name: 'book_modele')]
+    public function book_modele(): Response
+    {
+        return $this->render('modele/book-modele.html.twig', [
+            'user' => $this->getUser()
+        ]);
+    }
+    // fonction pour fill prestations/tarifs //
     #[Route('/tarifs', name: 'tarifs_form')]
     public function tarifs_form(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -127,6 +101,46 @@ class ModeleController extends AbstractController
             'tarifsUser' => $tarifsUser
         ]);
     }
+    #[Route('/deleteTarifs', name: 'delete_tarifs')]
+    public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+    {
+        // Vérifie si le token CSRF est valide
+        if ($this->isCsrfTokenValid('delete' . $tarif->getId(), $request->request->get('_token'))) {
+            // Supprime le tarif de la base de données
+            $entityManager->remove($tarif);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Tarif supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide.');
+        }
+
+        return $this->redirectToRoute('app_modele_index');
+    }
+
+    #[Route('/editTarif/{id}', name: 'edit_tarif')]
+public function editTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+{
+    // Récupérer le tarif à partir de la base de données
+    $tarif = $entityManager->getRepository(Tarifs::class)->find($tarif->getId());
+
+    // Créer le formulaire en utilisant le type de formulaire TarifsType et le tarif récupéré
+    $form = $this->createForm(TarifType::class, $tarif);
+    $form->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+        $entityManager->flush();
+
+        // Rediriger vers la page d'accueil ou toute autre page appropriée
+        return $this->redirectToRoute('app_modele_index');
+    }
+
+    return $this->render('modele/edit_tarif.html.twig', [
+        'form' => $form->createView(),
+        'tarif' => $tarif,
+    ]);
+}
+
 
     #[Route('/media/create', name: 'media_create')]
     public function media_create(Request $request, EntityManagerInterface $manager): Response
@@ -158,19 +172,18 @@ class ModeleController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             foreach ($sections as $section) {
                 //dd($section, $media->getDestination());
-                if ($media->getDestination() === $section) {
-                    $this->addFlash(
-                        'danger',
-                        'Section already in use'
-                    );
-                    return $this->render('modele/media_create.html.twig', [
-                        'form' => $form->createView(),
-                        'modele' => $modele,
-                    ]);
+                if ($form->isSubmitted() && $form->isValid()) {
+                    foreach ($sections as $section) {
+                        if ($media->getDestination() === $section) {
+                            $this->addFlash('danger', 'Section déjà utilisée');
+                            return $this->render('modele/media_create.html.twig', [
+                                'form' => $form->createView(),
+                                'modele' => $modele,
+                            ]);
+                        }
+                    }
                 }
             }
-
-
 
             $files = $form->get('nom')->getData();
 
@@ -189,7 +202,8 @@ class ModeleController extends AbstractController
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash('success', 'Média créé, vous pouvez en ajouter un autre et valider ou cliquer sur terminé pour voir le détail');
+            $this->addFlash('success', 'Média créé');
+            return $this->redirectToRoute('app_modele_media_create');
         }
 
         return $this->render('modele/media_create.html.twig', [

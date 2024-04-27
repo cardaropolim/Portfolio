@@ -16,9 +16,11 @@
 			<link rel="stylesheet" href="{{ asset('styles/styles.css') }}">
 		{% endblock %}
 
-		{# {% block javascripts %}
-		            {% block importmap %}{{ importmap('app') }}{% endblock %}
-		        {% endblock %}   #}
+		{% block javascripts %}
+			{% block importmap %}
+				{{ importmap('app') }}
+			{% endblock %}
+		{% endblock %}
 	</head>
 
 
@@ -27,7 +29,7 @@
 		<div class="navbar-base">
 			<nav class="navbar navbar-expand-lg">
 				<div class="container-fluid">
-					<a class="navbar-brand" href="#">Portfolio</a>
+					<a class="navbar-brand" href="{{ url('app_modele_index') }}">Portfolio</a>
 					<div class="nav-links">
 						<div class="navbar">
 							<ul class="navbar-nav">
@@ -99,3 +101,4 @@
 		</body>
 	</body>
 </html>
+

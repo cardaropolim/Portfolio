@@ -14,8 +14,7 @@ class PhotographeFormType extends AbstractType
         $builder
             ->add('agence')
             ->add('description')
-            ->add('signes_particuliers')
-        ;
+            ->add('signes_particuliers');
     }
 
     public function configureOptions(OptionsResolver $resolver): void

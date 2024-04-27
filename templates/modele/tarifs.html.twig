@@ -5,56 +5,63 @@
 {% block body %}
 
     {% block form_row %}        
-
-	 {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
-
-    <label for="{{ form.prestations.vars.id }}" class="form_prestations">Prestation</label>
-    {{ form_widget(form.prestations, {'attr': {'id': 'tarifForm'}}) }}
-
-     <label for="{{ form.prix.vars.id }}" class="form_prix">Prix</label>
-    {{ form_widget(form.prix, {'attr': {'id': 'tarifForm'}}) }}
-
-     {{ form_widget(form) }}
-
-    
-
-	<button type="submit" class="btn btn-outline-success">Sauvegarder</button>
-
+        {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
+        
+        <div class="form-group">
+            <label for="{{ form.prestations.vars.id }}">Prestation</label>
+            {{ form_widget(form.prestations, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        
+        <div class="form-group">
+            <label for="{{ form.prix.vars.id }}">Prix</label>
+            {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        
+        <button type="submit" class="btn btn-outline-success">Sauvegarder</button>
+        
+        {{ form_end(form) }} 
     {% endblock form_row %}
-	{{ form_end(form) }} 
-	<button type="button" id="add-input" class="btn btn-primary">Ajouter un tarif</button>
 
-	<div id="forms"></div>
+    <button type="button" id="add-input" class="btn btn-primary">Ajouter un tarif</button>
 
     <div id="list-tarifs">
-<table id="tarifs_modele">
-    <thead>
-	<br>
-        <tr>
-            <th>Prestations</th>
-            <th>Prix</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for tarif in tarifsUser %}
-            <tr>
-                <td>{{ tarif.prestations }}</td>
-                <td>{{ tarif.prix }}€</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Prestations</th>
+                    <th>Prix</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for tarif in tarifsUser %}
+                    <tr>
+                        <td>{{ tarif.prestations }}</td>
+                        <td>{{ tarif.prix }}€</td>
+                        <td>
+                            <form style="display: inline-block;" action="{{ path('app_modele_edit_tarif', {'id': tarif.id}) }}" method="get">
+                                <button type="submit" class="btn btn-info">Modifier</button>
+                            </form>
+                            <form style="display: inline-block;" action="{{ path('app_modele_delete_tarifs', {'id': tarif.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tarif ?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tarif.id) }}">
+                                <button type="submit" class="btn btn-danger">Supprimer</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-<script>
-		// Ajoute un nouveau champ input
-	const form = document.getElementById('tarifForm');
-	document.getElementById('add-input').addEventListener('click', function () {
-	console.log(form)
-	const cloneForm = form.cloneNode(true);
-	document.getElementById('forms').appendChild(cloneForm);
-	});
+    <div id="tarifforms"></div>
 
-</script>
+    <script>
+        const form = document.getElementById('tarifForm');
+        document.getElementById('add-input').addEventListener('click', function () {
+            const cloneForm = form.cloneNode(true);
+            document.getElementById('tarifforms').appendChild(cloneForm);
+        });
+    </script>
 
 {% endblock %}
