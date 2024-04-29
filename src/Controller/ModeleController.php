@@ -10,6 +10,7 @@ use App\Entity\Tarifs;
 use App\Form\MediaType;
 use App\Form\ModeleFormType;
 use App\Form\TarifType;
+use App\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,48 +21,44 @@ use Symfony\Component\Security\Http\Attribute\IsGranted;
 #[Route('/modele', name: 'app_modele_'), IsGranted('ROLE_MODELE')]
 class ModeleController extends AbstractController
 {
-    #[Route('/', name: 'index')]
-    public function index(): Response
-    {
-        if (!$this->getUser()->getModele()) {
-            return $this->redirectToRoute('app_modele_modeleprofile');
+        #[Route('/', name: 'index')]
+        public function index(): Response
+        {
+            if (!$this->getUser()->getModele()) {
+                return $this->redirectToRoute('app_modele_modeleprofile');
+            }
+
+            return $this->render('modele/index.html.twig', [
+                'controller_name' => 'ModeleController',
+            ]);
         }
 
-        return $this->render('modele/index.html.twig', [
-            'controller_name' => 'ModeleController',
-        ]);
-    }
 
-    // fonction pour fill, récupérer, modifier informations modèle //
-    #[Route('/informations-profile', name: 'modeleprofile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $modele = new Modele();
-        if ($this->getUser()->getModele()) {
-            $modele = $this->getUser()->getModele();
+        // fonction pour fill, récupérer, modifier informations modèle //
+        #[Route('/informations-profile', name: 'modeleprofile')]
+        public function profile(Request $request, EntityManagerInterface $entityManager): Response
+        {
+            $modele = new Modele();
+            if ($this->getUser()->getModele()) {
+                $modele = $this->getUser()->getModele();
+            }
+            $modele->setUser($this->getUser());
+            $form = $this->createForm(ModeleFormType::class, $modele);
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($modele);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_modele_index');
+            }
+            return $this->render('modele/profile-form.html.twig', [
+                'form' => $form->createView(),
+            ]);
         }
-        $modele->setUser($this->getUser());
-        $form = $this->createForm(ModeleFormType::class, $modele);
-        $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($modele);
-            $entityManager->flush();
+        // not in used for now //
 
-            return $this->redirectToRoute('app_modele_index');
-        }
-        return $this->render('modele/profile-form.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    #[Route('/compte', name: 'compte')]
-    public function compte(): Response
-    {
-        return $this->render('modele/compte.html.twig', []);
-    }
-
-    // not in used for now //
     #[Route('/contacts', name: 'contacts')]
     public function contacts(): Response
     {
@@ -149,22 +146,23 @@ class ModeleController extends AbstractController
     }
 
 
-    #[Route('/media/create', name: 'media_create' , methods: ['GET', 'POST'])]
+    #[Route('/media/create', name: 'media_create')]
     public function media_create(Request $request, EntityManagerInterface $manager): Response
     {
         // Récupérer l'utilisateur connecté
         $user = $this->getUser();
-    
+
         // Vérifier si l'utilisateur est un modèle et récupérer son modèle
         $modele = $user->getModele();
-    
+
         // Vérifier si le modèle existe
         if (!$modele) {
             // Rediriger vers la page de création de profil de modèle s'il n'existe pas
             return $this->redirectToRoute('app_modele_modeleprofile');
         }
-    
-        // Récupérer les sections existantes
+
+        $medias = $this->getUser()->getMedia();
+
         $sections = [];
         foreach ($user->getMedia() as $media) {
             $sections[] = $media->getDestination();
@@ -199,17 +197,14 @@ class ModeleController extends AbstractController
             $user->addMedium($media);
             $manager->persist($user);
             $manager->flush();
-    
-            // Rediriger vers la page d'index des modèles
-            $this->addFlash('success', 'Média créé, voir medias' );
-            return $this->redirectToRoute('app_modele_index');
+
+            $this->addFlash('success', 'Média créé');
+            return $this->redirectToRoute('app_modele_media_create');
         }
-    
-        // Afficher le formulaire de création de média
+
         return $this->render('modele/media_create.html.twig', [
-            'form' => $form,
+            'form' => $form->createView(),
             'modele' => $modele,
         ]);
     }
-    
 }
