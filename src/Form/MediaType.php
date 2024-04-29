@@ -3,8 +3,6 @@
 namespace App\Form;
 
 use App\Entity\Media;
-use App\Entity\User;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -12,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class MediaType extends AbstractType
 {
@@ -27,8 +26,8 @@ class MediaType extends AbstractType
                 ],
                 'constraints' => [
                     new File([
-                        'maxSize' => '6000k',
-                        'maxSizeMessage' => 'Fichier trop volumineux, 6Mo maximum',
+                        'maxSize' => '10M',
+                        'maxSizeMessage' => 'Fichier trop volumineux, {{ size }} maximum',
                         'mimeTypes' => ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'],
                         'mimeTypesMessage' => "Formats autorisés: 'image/jpg', 'image/jpeg', 'image/png', 'image/webp' "
 
@@ -42,15 +41,12 @@ class MediaType extends AbstractType
                     'Section 2 - page d\'Accueil BOOK' => 'section2',
                     'Section 3 - page d\'Accueil BOOK' => 'section3',
                     'Section 4 - page d\'Accueil BOOK' => 'section4',
+                    
                 ]
             ])
             ->add('description')
-            // ->add('user', EntityType::class, [
-            //     'class' => User::class,
-            //     'choice_label' => 'id',
-            // ])
-            ->add('Ajouter', SubmitType::class);
-    }
+            ->add('Ajouter', SubmitType::class, ['attr' => ['class' => 'index_button']]);
+        }
 
     public function configureOptions(OptionsResolver $resolver): void
     {

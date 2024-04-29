@@ -58,14 +58,33 @@ class PhotographeController extends AbstractController
         ]);
     }
 
+    #[Route('/compte', name: 'compte')]
+    public function compte(): Response
+    {
+        return $this->render('photographe/compte.html.twig', []);
+    }
 
+    // not in used for now //
+    #[Route('/contacts', name: 'contacts')]
+    public function contacts(): Response
+    {
+        return $this->render('photographe/contacts.html.twig', []);
+    }
+
+    // route book photographe //
     #[Route('/book_photographe', name: 'book_photographe')]
 
     public function book_modele(): Response
     {
-        return $this->render('photographe/book-photographe.html.twig', []);
+        // Récupère les données de l'utilisateur
+        $user = $this->getUser(); 
+
+        return $this->render('photographe/book-photographe.html.twig', [
+            'user' => $user,
+        ]);
     }
 
+    // fonction pour fill prestations/tarifs //
     #[Route('/tarifs', name: 'tarifs_form')]
     public function tarifs_form(Request $request, EntityManagerInterface $entityManager, PhotographeRepository $photographe): Response
     {
@@ -91,6 +110,46 @@ class PhotographeController extends AbstractController
         ]);
     }
 
+    #[Route('/deleteTarifs', name: 'delete_tarifs')]
+    public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+    {
+        // Vérifie si le token CSRF est valide
+        if ($this->isCsrfTokenValid('delete' . $tarif->getId(), $request->request->get('_token'))) {
+            // Supprime le tarif de la base de données
+            $entityManager->remove($tarif);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'Tarif supprimé avec succès.');
+        } else {
+            $this->addFlash('error', 'Token CSRF invalide.');
+        }
+
+        return $this->redirectToRoute('app_photographe_index');
+    }
+
+    #[Route('/editTarif/{id}', name: 'edit_tarif')]
+    public function editTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+    {
+        // Récupérer le tarif à partir de la base de données
+        $tarif = $entityManager->getRepository(Tarifs::class)->find($tarif->getId());
+
+        // Créer le formulaire en utilisant le type de formulaire TarifsType et le tarif récupéré
+        $form = $this->createForm(TarifType::class, $tarif);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+
+            // Rediriger vers la page d'accueil ou toute autre page appropriée
+            return $this->redirectToRoute('app_photographe_index');
+        }
+
+        return $this->render('photographe/edit_tarif.html.twig', [
+            'form' => $form->createView(),
+            'tarif' => $tarif,
+        ]);
+    }
+
     #[Route('/media/create', name: 'media_create')]
     public function media_create(Request $request, EntityManagerInterface $manager): Response
     {
@@ -105,6 +164,12 @@ class PhotographeController extends AbstractController
             // Rediriger vers la page de création de profil de modèle s'il n'existe pas
             return $this->redirectToRoute('app_photographe_photographe_profile');
         }
+            $medias = $this->getUser()->getMedia();
+
+            $sections = [];
+            foreach ($medias as $media) {
+                $sections[] = $media->getDestination();
+        }
 
         $media = new Media();
 
@@ -112,6 +177,22 @@ class PhotographeController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+
+            foreach ($sections as $section) {
+                //dd($section, $media->getDestination());
+                if ($form->isSubmitted() && $form->isValid()) {
+                    foreach ($sections as $section) {
+                        if ($media->getDestination() === $section) {
+                            $this->addFlash('danger', 'Section déjà utilisée');
+                            return $this->render('photographe/media_create.html.twig', [
+                                'form' => $form->createView(),
+                                'photographe' => $photographe,
+                            ]);
+                        }
+                    }
+                }
+            }
+
             $files = $form->get('nom')->getData();
             $nbMedias = count($user->getMedia());
 
@@ -119,15 +200,16 @@ class PhotographeController extends AbstractController
 
             $files->move($this->getParameter('upload_dir'), $file_name);
 
+            // $media->setNom($media->getNom() . ($nbMedias));
+            
             $media->setNom($file_name);
-            $media->setNom($media->getNom() . ($nbMedias));
-
             $manager->persist($media);
             $user->addMedium($media);
             $manager->persist($user);
             $manager->flush();
 
-            $this->addFlash('success', 'Média créé, vous pouvez en ajouter un autre et valider ou cliquer sur terminé pour voir le détail');
+            $this->addFlash('success', 'Média créé');
+            return $this->redirectToRoute('app_photographe_media_create');
         }
 
         return $this->render('photographe/media_create.html.twig', [

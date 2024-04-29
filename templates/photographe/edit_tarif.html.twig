@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modification Tarif{% endblock %}
+
+{% block body %}
+
+    <h1>Modifier Tarif</h1>
+
+    <div class="container">
+        <form method="post">
+            {{ form_start(form) }}
+            
+            <div class="form-group">
+                {{ form_label(form.prestations) }}
+                {{ form_widget(form.prestations, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            
+            <div class="form-group">
+                {{ form_label(form.prix) }}
+                {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+            </div>
+            
+            <button type="submit" class="index_button">Enregistrer</button>
+            
+            {{ form_end(form) }}
+        </form>
+    </div>
+
+{% endblock %}

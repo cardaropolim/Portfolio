@@ -7,16 +7,7 @@
 
     <h2>Inscription</h2>
     <h4>Bienvenue sur Portfolio,
-    
-    <SCRIPT LANGUAGE="JavaScript">
-        let maintenant=new Date();
-        let jour=maintenant.getDate();
-        let mois=maintenant.getMonth()+1;
-        let an=maintenant.getFullYear();
-        document.write("nous sommes le ",jour,"/",mois,"/",an,".");
-    </SCRIPT>
-    
-    </h4>
+
 
     {{ form_errors(registrationForm) }}
 
@@ -34,6 +25,6 @@
             label: 'Acceptez les conditions'
          }) }}
 
-        <button type="submit" class="btn btn-outline-success">S'inscrire</button>
+        <button type="submit" class="index_button">S'inscrire</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

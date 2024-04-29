@@ -7,85 +7,45 @@
 
 	<script>
 		/* Valeur true ou false selon le rôle */;
-var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
+const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 	</script>
 
-	{# {% for media in user.media %}
-		{% set destination1 = media.destination %}
-		{% set destination2 = media.destination %}
-		{% set destination3 = media.destination %}
-		{% set destination4 = media.destination %}
 
-		<section class="Head" id="{{ destination1 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; background-position: center;">
-			 <section class="Head">A
-			{% if destination1 == "section1" %}
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
-			{% endif %}
-			  </section>
+	{% for media in user.media %}
+		 {# {% set destination = media.destination %}  #}
 
-			  <section class="Biographie" id="{{ destination2 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; ">
-			{% if destination2 == "section2" %}
+		{% if media.destination == "section1" %}
+			<section id="Head">
 				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
-			{% endif %}
-			  </section>
+			</section>
+		{% endif %}
 
-			<section class="Bibliotheque" id="{{ destination3 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover; ">
-			{% if destination3 == "section3" %}
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+			{% if media.destination == "section2" %}
+		<section id="Biographie">
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
 			{% endif %}
-			  </section>
-			  
-			<section class="Contact" id="{{ destination4 }}" style="background-image: url('{{ asset('upload/' ~ media.nom) }}'); background-size: cover;">
-			{% if destination4 == "section4" %}
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+		</section>
+
+			{% if media.destination == "section3" %}
+		<section id="Bibliotheque">
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
+			{% endif %}
+		</section>
+
+			{% if media.destination == "section4" %}
+		<section id="Contact">
+				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
 				<p>
 					<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
 				</p>
 				<p>
 					<a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
 				</p>
+
 			{% endif %}
-			  
 		</section>
+
 	{% endfor %}
+{% endblock %}
 
-{% endblock %} #}
-
-
-        {% for media in user.media %}
-			{# {% set destination = media.destination %} #}
-
-            <section id="Head">
-                {% if media.destination == "section1" %}
-                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
-                {% endif %}
-            </section>
-
-            <section id="Biographie">
-                {% if media.destination == "section2" %}
-                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
-                {% endif %}
-            </section>
-
-            <section id="Bibliotheque">
-                {% if media.destination == "section3" %}
-                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
-                {% endif %}
-            </section>
-
-            <section id="Contact">
-                {% if media.destination == "section4" %}
-                    <img src="{{asset('upload/' ~ media.nom)}}  alt="une image ici">
-                <p>
-                    <a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
-                </p>
-                <p>
-                    <a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
-                </p>
-
-                {% endif %}
-            </section>
-
-         {% endfor %} 
-    {% endblock %} 

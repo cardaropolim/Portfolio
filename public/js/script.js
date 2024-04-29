@@ -71,3 +71,14 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 
+const loadFile = function (event) {
+    const image = document.getElementById('image');
+
+if(image) {
+
+    // Afficher l'aperçu de l'image sélectionnée
+    image.src = URL.createObjectURL(event.target.files[0]);
+}
+};
+
+

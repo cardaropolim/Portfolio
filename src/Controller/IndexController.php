@@ -11,7 +11,7 @@ class IndexController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(): Response
     {
-        return $this->render('index/index.html.twig');
+         return $this->render('index/index.html.twig');
 
         // Récupérer le modèle de l'utilisateur connecté
         $modele = $this->getUser()->getModele();
@@ -21,7 +21,7 @@ class IndexController extends AbstractController
             // Rediriger vers la page de création de profil de modèle s'il n'existe pas
             return $this->redirectToRoute('app_modele_modeleprofile');
         }
-
+        // Si le modèle existe, afficher la page d'accueil avec les données du modèle
         return $this->render('modele/index.html.twig', [
             'modele' => $modele,
             'controller_name' => 'ModeleController',
