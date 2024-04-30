@@ -19,6 +19,7 @@
                         <img src="{{ asset('upload/' ~ media.nom) }}" class="card-img-top" alt="{{ media.nom }}">
                         <div class="card-body">
                             <h5 class="card-title">{{ media.nom }}</h5>
+                            <h5 class="card-title">{{ media.destination }}</h5>
                             <a href="{{ path('app_modele_media_delete', {'id': media.id}) }}" class="btn btn-danger">Supprimer</a>
                         </div>
                     </div>

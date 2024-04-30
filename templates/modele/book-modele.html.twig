@@ -17,34 +17,37 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 
 		{% if media.destination == "section1" %}
 			<section id="Head">
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici">
 			</section>
 		{% endif %}
 
 			{% if media.destination == "section2" %}
 		<section id="Biographie">
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
 			{% endif %}
 		</section>
 
 			{% if media.destination == "section3" %}
 		<section id="Bibliotheque">
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
 			{% endif %}
 		</section>
 
-			{% if media.destination == "section4" %}
-		<section id="Contact">
-				<img src="{{ asset('upload/' ~ media.nom) }}" alt=" une image ici">
-				<p>
-					<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
-				</p>
-				<p>
-					<a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
-				</p>
-
-			{% endif %}
-		</section>
+{% if media.destination == "section4" %}
+<section id="Contact" style="text-align: center;">
+    <div style="position: relative;">
+        <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+            <h2>
+                <a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
+            </h2>
+            <h2>
+                <a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
+            </h2>
+        </div>
+    </div>
+</section>
+{% endif %}
 </div>
 	{% endfor %}
 {% endblock %}
