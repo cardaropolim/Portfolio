@@ -64,6 +64,19 @@ class ModeleController extends AbstractController
     {
         return $this->render('modele/contacts.html.twig', []);
     }
+    
+    #[Route('/compte', name: 'compte')]
+    public function compte(): Response
+    {
+        return $this->render('modele/compte.html.twig', []);
+    }
+
+    
+    #[Route('/bibliotheque', name: 'bibliotheque')]
+    public function bibliotheque(): Response
+    {
+        return $this->render('modele/bibliotheque.html.twig', []);
+    }
 
 
     // route book modele //
@@ -203,7 +216,7 @@ class ModeleController extends AbstractController
         }
 
         return $this->render('modele/media_create.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
             'modele' => $modele,
         ]);
     }

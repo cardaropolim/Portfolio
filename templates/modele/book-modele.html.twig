@@ -11,7 +11,7 @@ const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
 const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 	</script>
 
-
+<div class="sections">
 	{% for media in user.media %}
 		 {# {% set destination = media.destination %}  #}
 
@@ -45,7 +45,7 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 
 			{% endif %}
 		</section>
-
+</div>
 	{% endfor %}
 {% endblock %}
 

@@ -45,6 +45,23 @@ window.addEventListener('resize', () => {
 });
 console.log(menuHamburger);
 
+// fonction lightbox
+lightbox.option({
+    'resizeDuration': 200,
+    'wrapAround': true
+  })
+
+// boutons next et previous du slider lightbox 
+let sections = document.querySelectorAll('section');
+
+document.getElementById('next').onclick = function(){
+    let lists = document.querySelectorAll('.item');
+    document.getElementById('slide').appendChild(lists[0]);
+}
+document.getElementById('prev').onclick = function(){
+    let lists = document.querySelectorAll('.item');
+    document.getElementById('slide').prepend(lists[lists.length - 1]);
+}
 
 // Scroll to Top Button
 

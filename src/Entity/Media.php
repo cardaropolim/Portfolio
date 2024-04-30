@@ -27,8 +27,6 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'media')]
     private ?User $user = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medias', cascade: ['persist', 'remove'])]
-    private ?Gallerie $gallerie = null;
 
     public function getId(): ?int
     {

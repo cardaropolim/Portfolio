@@ -3,14 +3,17 @@
 {% block title %}Ajout Tarifs{% endblock %}
 
 {% block body %}
-
+<h1>Complêtez vos tarifs</h1>
+<div class="tarif_template">
     {% block form_row %}        
+<div class="Container_parent">
+<div class="Container">
         {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
         <div class="container">
         <div class="form-group">
             <label for="{{ form.prestations.vars.id }}">Prestation</label>
             {{ form_widget(form.prestations, {'attr': {'class': 'form-control'}}) }}
-        </div>
+        
         
         <div class="form-group">
             <label for="{{ form.prix.vars.id }}">Prix</label>
@@ -27,7 +30,7 @@
 
 {% if tarifsUser is not empty %}
 <br>
-<div class="container">
+
     <div id="list-tarifs">
         <table class="table table-info">
             <thead class="thead-dark">
@@ -61,7 +64,9 @@
     <div id="tarifforms"></div>
     </div>  
        {% endif %}
-
+</div>
+</div>
+</div>
     <script>
         const form = document.getElementById('tarifForm');
         document.getElementById('add-input').addEventListener('click', function () {
