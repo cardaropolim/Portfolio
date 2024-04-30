@@ -1,11 +1,16 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<!-- Bouton pour accéder à la liste des médias -->
+<a href="{{ path('app_modele_media_list') }}" class="index_button">Liste des médias</a>
 
-    {{ form(form) }} <!-- Affichage du formulaire -->
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.destination) }}
+    {{ form_row(form.description) }}
+    {{ form_row(form.Ajouter) }}
+{{ form_end(form) }}
 
-    <!-- Balise img pour afficher l'aperçu de l'image sélectionnée -->
-    <img id="image" width="300" alt=""><br>
 
 
 {% endblock %}

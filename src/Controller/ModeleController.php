@@ -16,6 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
 #[Route('/modele', name: 'app_modele_'), IsGranted('ROLE_MODELE')]
@@ -71,11 +72,16 @@ class ModeleController extends AbstractController
         return $this->render('modele/compte.html.twig', []);
     }
 
-    
+
     #[Route('/bibliotheque', name: 'bibliotheque')]
     public function bibliotheque(): Response
     {
-        return $this->render('modele/bibliotheque.html.twig', []);
+        // Récupère les données de l'utilisateur   
+        $user = $this->getUser(); 
+
+        return $this->render('modele/bibliotheque.html.twig', [
+        'user' => $user,
+        ]);
     }
 
 
@@ -88,7 +94,7 @@ class ModeleController extends AbstractController
         $user = $this->getUser(); 
 
         return $this->render('modele/book-modele.html.twig', [
-            'user' => $user,
+        'user' => $user,
         ]);
     }
 
@@ -190,14 +196,15 @@ class ModeleController extends AbstractController
     
         // Vérifier si le formulaire est soumis et valide
         if ($form->isSubmitted() && $form->isValid()) {
-            // Vérifier si la section est déjà utilisée
-            if (in_array($media->getDestination(), $sections)) {
-                $this->addFlash('danger', 'Section déjà utilisée');
-                return $this->redirectToRoute('app_modele_media_create', [
-                    'form' => $form,
-                    'modele' => $modele,
-                ]);
-            }
+        // Vérifier si la section est déjà utilisée
+        if ($media->getDestination() !== 'bibliotheque' && in_array($media->getDestination(), $sections)) {
+            $this->addFlash('danger', 'Section déjà utilisée');
+            return $this->redirectToRoute('app_modele_media_create', [
+                'form' => $form,
+                'modele' => $modele,
+            ]);
+        }
+
     
             // Traiter le fichier uploadé
             $files = $form->get('nom')->getData();
@@ -220,4 +227,43 @@ class ModeleController extends AbstractController
             'modele' => $modele,
         ]);
     }
+
+            #[Route('/media/{id}/delete', name: 'media_delete')]
+        public function media_delete(Media $media, Request $request, EntityManagerInterface $manager): Response
+        {
+            // Vérifier si l'utilisateur connecté est le propriétaire du média
+            $user = $this->getUser();
+            if ($user !== $media->getUser()) {
+                throw new AccessDeniedException("Vous n'avez pas la permission de supprimer ce média.");
+            }
+
+            // Supprimer le média de la base de données et du système de fichiers
+            $manager->remove($media);
+            $manager->flush();
+
+            // Rediriger vers la page de création de média avec un message flash
+            $this->addFlash('success', 'Le média a été supprimé avec succès.');
+            return $this->redirectToRoute('app_modele_media_create');
+        }
+
+        #[Route('/media/list', name: 'media_list')]
+        public function media_list(Request $request): Response
+        {
+            // Récupérer l'utilisateur connecté
+            $user = $this->getUser();
+
+                    // Vérifier si l'utilisateur est un modèle et récupérer son modèle
+        $modele = $user->getModele();
+
+            // Récupérer les médias de l'utilisateur
+            $medias = $user->getMedia();
+
+            return $this->render('modele/media_list.html.twig', [
+                'user' => $user,
+                'medias' => $medias,
+                'modele' => $modele,
+            ]);
+        }
+
+
 }

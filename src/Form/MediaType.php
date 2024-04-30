@@ -41,6 +41,8 @@ class MediaType extends AbstractType
                     'Section 2 - page d\'Accueil BOOK' => 'section2',
                     'Section 3 - page d\'Accueil BOOK' => 'section3',
                     'Section 4 - page d\'Accueil BOOK' => 'section4',
+                    'Bibliothèque - Gallerie' => 'bibliotheque',
+
                     
                 ]
             ])

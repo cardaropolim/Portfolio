@@ -45,23 +45,23 @@ window.addEventListener('resize', () => {
 });
 console.log(menuHamburger);
 
-// fonction lightbox
-lightbox.option({
-    'resizeDuration': 200,
-    'wrapAround': true
-  })
+// // fonction lightbox
+// lightbox.option({
+//     'resizeDuration': 200,
+//     'wrapAround': true
+//   })
 
-// boutons next et previous du slider lightbox 
-let sections = document.querySelectorAll('section');
+// // boutons next et previous du slider lightbox 
+// let sections = document.querySelectorAll('section');
 
-document.getElementById('next').onclick = function(){
-    let lists = document.querySelectorAll('.item');
-    document.getElementById('slide').appendChild(lists[0]);
-}
-document.getElementById('prev').onclick = function(){
-    let lists = document.querySelectorAll('.item');
-    document.getElementById('slide').prepend(lists[lists.length - 1]);
-}
+// document.getElementById('next').onclick = function(){
+//     let lists = document.querySelectorAll('.item');
+//     document.getElementById('slide').appendChild(lists[0]);
+// }
+// document.getElementById('prev').onclick = function(){
+//     let lists = document.querySelectorAll('.item');
+//     document.getElementById('slide').prepend(lists[lists.length - 1]);
+// }
 
 // Scroll to Top Button
 
@@ -97,5 +97,39 @@ if(image) {
     image.src = URL.createObjectURL(event.target.files[0]);
 }
 };
+
+
+////////////////////////////////////////////
+
+document.addEventListener("DOMContentLoaded", function() {
+    // Vérifier si nous sommes sur la page 'bibliotheque.html.twig'
+    if (document.querySelector('.thumbnails')) {
+        // Sélectionnez toutes les miniatures
+        var thumbnails = document.querySelectorAll('.thumbnail-image');
+
+        // Ajoutez un écouteur d'événement clic à chaque miniature
+        thumbnails.forEach(function(thumbnail) {
+            thumbnail.addEventListener('click', function() {
+                var imageSrc = this.getAttribute('src');
+
+                // Mettez à jour l'élément image en plein écran avec la source de l'image miniature
+                document.getElementById('fullscreen-image').setAttribute('src', imageSrc);
+
+                // Affichez l'overlay en plein écran
+                document.getElementById('fullscreen-overlay').style.display = 'flex';
+            });
+        });
+
+        // Ajoutez un écouteur d'événement clic pour fermer l'overlay en plein écran
+        document.getElementById('close-fullscreen').addEventListener('click', function() {
+            document.getElementById('fullscreen-overlay').style.display = 'none';
+        });
+
+        // Empêchez la propagation des clics à partir de l'image en plein écran
+        document.getElementById('fullscreen-image-container').addEventListener('click', function(event) {
+            event.stopPropagation();
+        });
+    }
+});
 
 
