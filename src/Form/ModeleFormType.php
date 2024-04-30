@@ -6,6 +6,7 @@ use App\Entity\Modele;
 use App\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +25,8 @@ class ModeleFormType extends AbstractType
             ->add('pointure')
             ->add('poids')
             ->add('type_ethnique')
-            ->add('signes_particuliers');
+            ->add('signes_particuliers')
+            ->add("Modifier", SubmitType::class, ['attr' => ['class' => 'index_button']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -20,19 +20,20 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 
 <!-- La structure HTML pour les miniatures -->
 <div class="thumbnails">
-    <table>
-        <tr>
-            {% for media in user.media %}
-                {% if media.destination == "bibliotheque" %}
-                    <td>
-                        <div class="thumbnail">
-                            <img class="thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
-                        </div>
-                    </td>
+    <div class="row">
+        {% for media in user.media %}
+            {% if media.destination == "bibliotheque" %}
+                <div class="col-md-3 mb-3">
+                    <div class="thumbnail">
+                        <img class="thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+                    </div>
+                </div>
+                {% if loop.index % 4 == 0 %}
+                    </div><div class="row">
                 {% endif %}
-        </tr>
-    </table>
+            {% endif %}
+        {% endfor %}
+    </div>
 </div>
 
-{% endfor %}
 {% endblock %}

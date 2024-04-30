@@ -26,18 +26,42 @@
 					<div class="nav-links">
 						<div class="navbar">
 							<ul class="navbar-nav">
-								<li>
+
+															{% if app.user %}
+									{% if is_granted('ROLE_MODELE') %}
+										<li>
+											<a href={{ url('app_modele_book_modele') }} class="index_button">Book Modèle</a>
+										</li>
+												<li>
+									<a href={{ url('app_modele_index') }} class="index_button">Dashboard</a>
+								</li>
+									
+
+										{%else%}
+
+										{% if is_granted('ROLE_PHOTOGRAPHE') %}
+											<li>
+												<a href={{ url('app_photographe_book_photographe') }} class="index_button">Book Photographe</a>
+											</li>
+													<li>
+									<a href={{ url('app_photographe_index') }} class="index_button">Dashboard</a>
+								</li>
+
+										{% endif %}
+									{% endif %}
+								{% endif %}
+
+
+								{# <li>
 									<a href="#Biographie" class="index_button">Biographie</a>
-								</li>
-								<li>
+								</li> #}
+								<li> 
 									<a href={{ url('app_modele_bibliotheque') }} class="index_button">Bibliothèque</a>
-								</li>
-								<li>
-									<a href={{ url('app_modele_index') }} class="index_button">Admin</a>
 								</li>
 								<li>
 									<a href="#Contact" class="index_button">Contact</a>
 								</li>
+						
 							</ul>
 						</div>
 					</div>
