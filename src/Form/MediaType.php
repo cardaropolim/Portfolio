@@ -47,7 +47,16 @@ class MediaType extends AbstractType
                 ]
             ])
             ->add('description')
-            ->add('Ajouter', SubmitType::class, ['attr' => ['class' => 'index_button']]);
+            ->add('Ajouter', SubmitType::class, ['attr' => ['class' => 'index_button']])
+            // ->add('liste_medias', ButtonType::class, [
+            //     'label' => 'Liste des médias',
+            //     'attr' => [
+            //         'class' => 'index_button',
+            //         'onclick' => 'window.location.href="'. $options['url_liste_medias'] .'"',
+            //     ],
+            // // ]);
+
+            ;
         }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -45,8 +45,6 @@ class PhotographeController extends AbstractController
         $form = $this->createForm(PhotographeFormType::class, $photographe);
         $form->handleRequest($request);
 
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($photographe);
             $entityManager->flush();
@@ -215,6 +213,44 @@ class PhotographeController extends AbstractController
         return $this->render('photographe/media_create.html.twig', [
             'form' => $form->createView(),
             'photographe' => $photographe,
+        ]); 
+    }
+
+
+    #[Route('/media/{id}/delete', name: 'media_delete')]
+    public function media_delete(Media $media, Request $request, EntityManagerInterface $manager): Response
+    {
+        // Vérifier si l'utilisateur connecté est le propriétaire du média
+        $user = $this->getUser();
+        if ($user !== $media->getUser()) {
+            throw new AccessDeniedException("Vous n'avez pas la permission de supprimer ce média.");
+        }
+
+        // Supprimer le média de la base de données et du système de fichiers
+        $manager->remove($media);
+        $manager->flush();
+
+        // Rediriger vers la page de création de média avec un message flash
+        $this->addFlash('success', 'Le média a été supprimé avec succès.');
+        return $this->redirectToRoute('app_photographe_media_create');
+    }
+
+    #[Route('/media/list', name: 'media_list')]
+    public function media_list(Request $request): Response
+    {
+        // Récupérer l'utilisateur connecté
+        $user = $this->getUser();
+
+                // Vérifier si l'utilisateur est un modèle et récupérer son modèle
+    $modele = $user->getPhotographe();
+
+        // Récupérer les médias de l'utilisateur
+        $medias = $user->getMedia();
+
+        return $this->render('photographe/media_list.html.twig', [
+            'user' => $user,
+            'medias' => $medias,
+            // 'photographe' => $photographe,
         ]);
     }
 }

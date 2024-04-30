@@ -1,0 +1,39 @@
+{% extends "basebook.html.twig" %}
+
+{% block title %}Bibliothèque!{% endblock %}
+
+{% block body %}
+
+<script>
+    /* Valeur true ou false selon le rôle */;
+const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
+</script>
+
+<!-- La structure HTML pour l'image en plein écran -->
+<div id="fullscreen-overlay">
+    <div id="fullscreen-image-container">
+        <img id="fullscreen-image" src="" alt="Image en plein écran">
+        <button id="close-fullscreen">Fermer</button>
+    </div>
+</div>
+
+<!-- La structure HTML pour les miniatures -->
+<div class="thumbnails">
+    <div class="row">
+        {% for media in user.media %}
+            {% if media.destination == "bibliotheque" %}
+                <div class="col-md-3 mb-3">
+                    <div class="thumbnail">
+                        <img class="thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+                    </div>
+                </div>
+                {% if loop.index % 4 == 0 %}
+                    </div><div class="row">
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

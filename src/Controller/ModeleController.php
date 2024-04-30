@@ -65,13 +65,6 @@ class ModeleController extends AbstractController
     {
         return $this->render('modele/contacts.html.twig', []);
     }
-    
-    #[Route('/compte', name: 'compte')]
-    public function compte(): Response
-    {
-        return $this->render('modele/compte.html.twig', []);
-    }
-
 
     #[Route('/bibliotheque', name: 'bibliotheque')]
     public function bibliotheque(): Response

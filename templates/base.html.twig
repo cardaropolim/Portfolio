@@ -43,7 +43,7 @@
 											<a href={{ url('app_modele_book_modele') }} class="index_button">Book Modèle</a>
 										</li>
 										<li>
-											<a href='{{ url('app_modele_index') }}' class="index_button">Home</a>
+											<a href='{{ url('app_modele_index') }}' class="index_button">Dashboard</a>
 										</li>
 
 										{%else%}
@@ -53,7 +53,7 @@
 												<a href={{ url('app_photographe_book_photographe') }} class="index_button">Book Photographe</a>
 											</li>
 											<li>
-												<a href='{{ url('app_photographe_index') }}' class="index_button">Home</a>
+												<a href='{{ url('app_photographe_index') }}' class="index_button">Dashboard</a>
 											</li>
 										{% endif %}
 									{% endif %}
@@ -62,9 +62,7 @@
 								{% if app.user %}
 
 
-									<li>
-										<a href='{{ url('app_modele_compte') }}' class="index_button">Compte</a>
-									</li>
+
 									<li>
 										<a href={{url("app_logout")}} class="index_button">Déconnexion</a>
 									</li>
