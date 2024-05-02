@@ -7,7 +7,6 @@ const linksModele = document.querySelector("#links-modele")
 
 const linksPhotographe = document.querySelector("#links-photographe")
 
-
 // Sélectionnez également le conteneur des liens de navigation
 const navLinks = document.querySelector(".nav-links");
 
@@ -35,7 +34,6 @@ menuHamburger.addEventListener('click', () => {
     }
 });
 
-
 // Ajoutez un écouteur d'événement au redimensionnement de la fenêtre
 window.addEventListener('resize', () => {
     // Vérifiez si le menu mobile est affiché et que la largeur de la fenêtre est supérieure à 900 pixels
@@ -44,24 +42,6 @@ window.addEventListener('resize', () => {
     }
 });
 console.log(menuHamburger);
-
-// // fonction lightbox
-// lightbox.option({
-//     'resizeDuration': 200,
-//     'wrapAround': true
-//   })
-
-// // boutons next et previous du slider lightbox 
-// let sections = document.querySelectorAll('section');
-
-// document.getElementById('next').onclick = function(){
-//     let lists = document.querySelectorAll('.item');
-//     document.getElementById('slide').appendChild(lists[0]);
-// }
-// document.getElementById('prev').onclick = function(){
-//     let lists = document.querySelectorAll('.item');
-//     document.getElementById('slide').prepend(lists[lists.length - 1]);
-// }
 
 // Scroll to Top Button
 

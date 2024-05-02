@@ -105,13 +105,13 @@
             .navbar .nav-links ul {
                 display: flex;
                 margin-left: 25px;
-                /* font-size: larger; */
+           
             }
 
             .navbar .nav-links ul li {
                 display: flex;
                 margin-left: 25px;
-                /* font-size: larger; */
+
             }
 
             .navbar .nav-links ul li:hover {
@@ -168,10 +168,15 @@
 
                 .nav-links.mobile-menu {
                     margin-left: 0;
-                    width: 50em;
                     justify-content: center;
                     align-items: center;
                 }
+
+                .index_button.nav-links.mobile-menu, button {
+                    width: 200px;
+                    height: 50px;
+                }
+                
 
                 .nav-links ul {
                     display: flex;
@@ -183,6 +188,7 @@
                 /* Style des éléments de la barre de navigation */
                 .navbar-base .nav-links ul li {
                     margin: 25px 0;
+                    
                     font-size: 1.5em;
                 }
 

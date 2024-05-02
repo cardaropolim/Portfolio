@@ -65,7 +65,7 @@ class ModeleController extends AbstractController
     {
         return $this->render('modele/contacts.html.twig', []);
     }
-    
+
     #[Route('/FAQ', name: 'FAQ')]
     public function FAQ(): Response
     {
@@ -97,71 +97,82 @@ class ModeleController extends AbstractController
         ]);
     }
 
-    // fonction pour fill prestations/tarifs //
-    #[Route('/tarifs', name: 'tarifs_form')]
-    public function tarifs_form(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $tarifsUser = $this->getUser()->getTarifs();
+// méthode pour ajouter des prestations/tarifs 
+#[Route('/tarifs', name: 'tarifs_form')]
+public function tarifs_form(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Récupère les tarifs associés à l'utilisateur connecté
+    $tarifsUser = $this->getUser()->getTarifs();
 
-        $tarif = new Tarifs();
-        // Créer le formulaire en utilisant le type de formulaire TarifsType et l'entité Modele récupérée
-        $form = $this->createForm(TarifType::class, $tarif);
-        $form->handleRequest($request);
+    // Crée une nouvelle instance de l'entité Tarifs
+    $tarif = new Tarifs();
+    // Crée le formulaire en utilisant le type de formulaire TarifType et l'entité Tarifs créée
+    $form = $this->createForm(TarifType::class, $tarif);
+    $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $tarif->setUser($this->getUser());
-            $entityManager->persist($tarif);
-            $entityManager->flush();
+    // Vérifie si le formulaire a été soumis et est valide
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Associe le tarif à l'utilisateur actuel
+        $tarif->setUser($this->getUser());
+        // Persiste le tarif dans la base de données
+        $entityManager->persist($tarif);
+        $entityManager->flush();
 
-            // Rediriger vers la page d'accueil ou toute autre page appropriée
-            return $this->redirectToRoute('app_modele_index');
-        }
-
-        return $this->render('modele/tarifs.html.twig', [
-            'form' => $form->createView(),
-            'tarifsUser' => $tarifsUser
-        ]);
-    }
-
-    #[Route('/deleteTarifs', name: 'delete_tarifs')]
-    public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
-    {
-        // Vérifie si le token CSRF est valide
-        if ($this->isCsrfTokenValid('delete' . $tarif->getId(), $request->request->get('_token'))) {
-            // Supprime le tarif de la base de données
-            $entityManager->remove($tarif);
-            $entityManager->flush();
-
-            $this->addFlash('success', 'Tarif supprimé avec succès.');
-        } else {
-            $this->addFlash('error', 'Token CSRF invalide.');
-        }
-
+        // Redirige vers la page d'accueil
         return $this->redirectToRoute('app_modele_index');
     }
 
-    #[Route('/editTarif/{id}', name: 'edit_tarif')]
-    public function editTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
-    {
-        // Récupérer le tarif à partir de la base de données
-        $tarif = $entityManager->getRepository(Tarifs::class)->find($tarif->getId());
+    return $this->render('modele/tarifs.html.twig', [
+        'form' => $form->createView(),
+        'tarifsUser' => $tarifsUser
+    ]);
+}
 
-        // Créer le formulaire en utilisant le type de formulaire TarifsType et le tarif récupéré
-        $form = $this->createForm(TarifType::class, $tarif);
-        $form->handleRequest($request);
+#[Route('/deleteTarifs', name: 'delete_tarifs')]
+public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+{
+    // Vérifie si le token CSRF est valide
+    if ($this->isCsrfTokenValid('delete' . $tarif->getId(), $request->request->get('_token'))) {
+        // Supprime le tarif de la base de données
+        $entityManager->remove($tarif);
+        $entityManager->flush();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-
-            // Rediriger vers la page d'accueil ou toute autre page appropriée
-            return $this->redirectToRoute('app_modele_index');
-        }
-
-        return $this->render('modele/edit_tarif.html.twig', [
-            'form' => $form->createView(),
-            'tarif' => $tarif,
-        ]);
+        // Message flash pour indiquer que le tarif a été supprimé avec succès
+        $this->addFlash('success', 'Tarif supprimé avec succès.');
+    } else {
+        // Message flash pour indiquer que le token CSRF est invalide
+        $this->addFlash('error', 'Token CSRF invalide.');
     }
+
+    // Redirige vers la page d'accueil
+    return $this->redirectToRoute('app_modele_index');
+}
+
+#[Route('/editTarif/{id}', name: 'edit_tarif')]
+public function editTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
+{
+    // Récupère le tarif à partir de la base de données en utilisant son identifiant
+    $tarif = $entityManager->getRepository(Tarifs::class)->find($tarif->getId());
+
+    // Crée le formulaire en utilisant le type de formulaire TarifType et le tarif récupéré
+    $form = $this->createForm(TarifType::class, $tarif);
+    $form->handleRequest($request);
+
+    // Vérifie si le formulaire a été soumis et est valide
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Met à jour le tarif dans la base de données
+        $entityManager->flush();
+
+        // Redirige vers la page d'accueil
+        return $this->redirectToRoute('app_modele_index');
+    }
+
+    return $this->render('modele/edit_tarif.html.twig', [
+        'form' => $form->createView(),
+        'tarif' => $tarif,
+    ]);
+}
+
 
 
     #[Route('/media/create', name: 'media_create')]

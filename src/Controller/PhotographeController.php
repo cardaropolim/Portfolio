@@ -69,6 +69,13 @@ class PhotographeController extends AbstractController
         return $this->render('photographe/contacts.html.twig', []);
     }
 
+
+    #[Route('/FAQ', name: 'FAQ')]
+    public function FAQ(): Response
+    {
+        return $this->render('photographe/FAQ.html.twig', []);
+    }
+
     // route book photographe //
     #[Route('/book_photographe', name: 'book_photographe')]
 
