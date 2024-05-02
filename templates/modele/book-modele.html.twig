@@ -44,6 +44,9 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
             <h2>
                 <a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
             </h2>
+			<h2>{{ user.ville }}</h2>
+			<h2>{{ user.codePostal }}</h2>
+			<h2>{{ user.pays }}</h2>
         </div>
     </div>
 </section>

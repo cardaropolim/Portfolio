@@ -12,13 +12,46 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\Regex;
 
 class RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+        ->add('email', null, [
+            'constraints' => [
+                new Email([
+                    'message' => 'L\'email "{{ value }}" n\'est pas valide.',
+                ]),
+            ],
+        ])
+        ->add('ville', null, [
+            'constraints' => [
+                new Regex([
+                    'pattern' => '/^[a-zA-Z\s]+$/',
+                    'message' => 'La ville ne peut contenir que des lettres.',
+                ]),
+            ],
+        ])
+        ->add('code_postal', null, [
+            'constraints' => [
+                new Length([
+                    'min' => 5,
+                    'max' => 5,
+                    'exactMessage' => 'Le code postal doit contenir exactement {{ limit }} chiffres.',
+                ]),
+            ],
+        ])
+        ->add('pays', null, [
+            'constraints' => [
+                new Regex([
+                    'pattern' => '/^[a-zA-Z\s]+$/',
+                    'message' => 'Le pays ne peut contenir que des lettres.',
+                ]),
+            ],
+        ])
             ->add('role', ChoiceType::class, [
                 'choices' => [
                     'Modèle' => 'ROLE_MODELE',
@@ -32,7 +65,7 @@ class RegistrationFormType extends AbstractType
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
-                        'message' => 'You should agree to our terms.',
+                        'message' => 'Vous devez acceptez les conditions.',
                     ]),
                 ],
             ])
@@ -43,13 +76,14 @@ class RegistrationFormType extends AbstractType
                 'attr' => ['autocomplete' => 'new-password'],
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Please enter a password',
+                        'message' => 'Entrez un Mot de passe',
                     ]),
                     new Length([
                         'min' => 6,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre Mot de passe doit contenir minimum {{ limit }} caractères',
                         // max length allowed by Symfony for security reasons
-                        'max' => 4096,
+                        'max' => 20,
+                        'maxMessage' => 'Votre Mot de passe doit contenir maximum {{ limit }} caractères',
                     ]),
                 ],
             ]);
