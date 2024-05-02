@@ -20,14 +20,9 @@
             <div class="sticky-sm-top">
                 <div class="nav flex-column">
         <a href={{ url('app_photographe_photographe_profile') }} class="index_button">Mes Informations</a><br>  
-        {# <a href={{ url('app_modele_disponibilites') }} class="btn btn-outline-success">Disponibilités</a>   #}
-        {# <a href='#' class="btn btn-outline-success">Contacts</a>   #}
-        {# <a href='#' class="btn btn-outline-success">Livre d'Or</a> #}
-        {# <a href={{ url('app_modele_reseaux_sociaux') }} class="btn btn-outline-success">Réseaux Sociaux</a>  #}
-        {# <a href={{ url('app_modele_statistiques') }} class="btn btn-outline-success">Statistiques</a>  #}
-        {# <a href='#' class="btn btn-outline-success">Mobilité</a>  #}
         <a href={{ url('app_photographe_tarifs_form') }} class="index_button">Mes Tarifs</a><br>
-        <a href={{ url('app_photographe_media_create') }} class="index_button">Mes Media</a> 
+        <a href={{ url('app_photographe_media_create') }} class="index_button">Mes Media</a> <br>
+        <a href={{ url('app_photographe_user_informations', {'id': user.id}) }} class="index_button">Mes infos</a>
 
                 </div>
             </div>

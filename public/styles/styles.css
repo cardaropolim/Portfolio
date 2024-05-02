@@ -17,21 +17,23 @@
                 font-size: 2.5em;
             }
 
-            .footer {
-                position: absolute;
+             .footer {
+                display: flex;
+                position: -webkit-sticky;
                 left: 0;
-                bottom: 0;
+                bottom: 1%;
                 width: 100%;
-                background-color: #a29696;
+                background-image: linear-gradient(34deg, transparent 0%, transparent 20%, rgba(6, 6, 6, 0.02) 20%, rgba(6, 6, 6, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(300deg, transparent 0%, transparent 20%, rgba(254, 254, 254, 0.01) 20%, rgba(254, 254, 254, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(275deg, transparent 0%, transparent 20%, rgba(4, 4, 4, 0.01) 20%, rgba(4, 4, 4, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(95deg, transparent 0%, transparent 20%, rgba(207, 207, 207, 0.01) 20%, rgba(207, 207, 207, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(330deg, transparent 0%, transparent 20%, rgba(177, 177, 177, 0.01) 20%, rgba(177, 177, 177, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(264deg, transparent 0%, transparent 20%, rgba(171, 171, 171, 0.01) 20%, rgba(171, 171, 171, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(359deg, transparent 0%, transparent 20%, rgba(229, 229, 229, 0.02) 20%, rgba(229, 229, 229, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(238deg, transparent 0%, transparent 20%, rgba(150, 150, 150, 0.02) 20%, rgba(150, 150, 150, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(295deg, transparent 0%, transparent 20%, rgba(52, 52, 52, 0.03) 20%, rgba(52, 52, 52, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(215deg, transparent 0%, transparent 20%, rgba(165, 165, 165, 0.02) 20%, rgba(165, 165, 165, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(69deg, transparent 0%, transparent 20%, rgba(41, 41, 41, 0.03) 20%, rgba(41, 41, 41, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(357deg, transparent 0%, transparent 20%, rgba(181, 181, 181, 0.01) 20%, rgba(181, 181, 181, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(272deg, transparent 0%, transparent 20%, rgba(93, 93, 93, 0.01) 20%, rgba(93, 93, 93, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(329deg, transparent 0%, transparent 20%, rgba(109, 109, 109, 0.03) 20%, rgba(109, 109, 109, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(57deg, transparent 0%, transparent 20%, rgba(153, 153, 153, 0.02) 20%, rgba(153, 153, 153, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(269deg, transparent 0%, transparent 20%, rgba(159, 159, 159, 0.02) 20%, rgba(159, 159, 159, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(144deg, transparent 0%, transparent 20%, rgba(9, 9, 9, 0.03) 20%, rgba(9, 9, 9, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(217deg, transparent 0%, transparent 20%, rgba(157, 157, 157, 0.03) 20%, rgba(157, 157, 157, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(31deg, transparent 0%, transparent 20%, rgba(91, 91, 91, 0.01) 20%, rgba(91, 91, 91, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(277deg, transparent 0%, transparent 20%, rgba(132, 132, 132, 0.02) 20%, rgba(132, 132, 132, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(164deg, transparent 0%, transparent 20%, rgba(67, 67, 67, 0.03) 20%, rgba(67, 67, 67, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(24deg, transparent 0%, transparent 20%, rgba(174, 174, 174, 0.01) 20%, rgba(174, 174, 174, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(342deg, transparent 0%, transparent 20%, rgba(168, 168, 168, 0.02) 20%, rgba(168, 168, 168, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(61deg, transparent 0%, transparent 20%, rgba(58, 58, 58, 0.03) 20%, rgba(58, 58, 58, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(305deg, transparent 0%, transparent 20%, rgba(127, 127, 127, 0.03) 20%, rgba(127, 127, 127, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(291deg, transparent 0%, transparent 20%, rgba(213, 213, 213, 0.01) 20%, rgba(213, 213, 213, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(114deg, transparent 0%, transparent 20%, rgba(241, 241, 241, 0.01) 20%, rgba(241, 241, 241, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(35deg, transparent 0%, transparent 20%, rgba(140, 140, 140, 0.03) 20%, rgba(140, 140, 140, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(344deg, transparent 0%, transparent 20%, rgba(10, 10, 10, 0.01) 20%, rgba(10, 10, 10, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(259deg, transparent 0%, transparent 20%, rgba(215, 215, 215, 0.02) 20%, rgba(215, 215, 215, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(333deg, transparent 0%, transparent 20%, rgba(73, 73, 73, 0.03) 20%, rgba(73, 73, 73, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(290deg, transparent 0%, transparent 20%, rgba(28, 28, 28, 0.03) 20%, rgba(28, 28, 28, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(42deg, transparent 0%, transparent 20%, rgba(65, 65, 65, 0.01) 20%, rgba(65, 65, 65, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(308deg, transparent 0%, transparent 20%, rgba(80, 80, 80, 0.01) 20%, rgba(80, 80, 80, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(107deg, transparent 0%, transparent 20%, rgba(96, 96, 96, 0.01) 20%, rgba(96, 96, 96, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(352deg, transparent 0%, transparent 20%, rgba(94, 94, 94, 0.02) 20%, rgba(94, 94, 94, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(167deg, transparent 0%, transparent 20%, rgba(82, 82, 82, 0.02) 20%, rgba(82, 82, 82, 0.02) 48%, transparent 48%, transparent 100%), linear-gradient(200deg, transparent 0%, transparent 20%, rgba(12, 12, 12, 0.03) 20%, rgba(12, 12, 12, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(206deg, transparent 0%, transparent 20%, rgba(64, 64, 64, 0.03) 20%, rgba(64, 64, 64, 0.03) 48%, transparent 48%, transparent 100%), linear-gradient(29deg, transparent 0%, transparent 20%, rgba(107, 107, 107, 0.01) 20%, rgba(107, 107, 107, 0.01) 48%, transparent 48%, transparent 100%), linear-gradient(90deg, rgb(255, 255, 255), rgb(255, 255, 255));
                 color: rgb(0, 0, 0);
                 text-align: center;
-                padding: 20px;
-            }
+             
+            } 
 
             /********************** Styles de base pour le corps de la page ********************/
             body {
-                background-color: rgb(92, 92, 90);
+            
                 height: auto;
+                scroll-behavior:smooth;
             }
 
             /* Styles de base pour le comportement de défilement fluide */
@@ -52,6 +54,21 @@
                 text-decoration: none;
             }
 
+            /* #contact::h2 {
+                background: white;
+            } */
+
+            .highlight {
+                background: #ADA996;  /* fallback for old browsers */
+                background: -webkit-linear-gradient(to bottom, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);  /* Chrome 10-25, Safari 5.1-6 */
+                background: linear-gradient(to bottom, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                border-radius: 2em;
+                opacity: 82%;
+                color: black;
+                padding: 3px 6px;
+              }
+              
+
             /*//////////////////////////////// Style BOUTONS //////////////////////////////////*/
 
             .index_button,
@@ -64,7 +81,7 @@
                 --bg-color: background: #ADA996;
                 background: -webkit-linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
                 background: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
-                --main-color: #32323288;
+                --main-color: #75151588;
                 width: 160px;
                 height: 35px;
                 border-radius: 5px;
@@ -78,6 +95,7 @@
                 text-align: center;
                 margin-right: 3px;
                 margin-left: 3px;
+                margin-bottom: 10px;
                 font-family: "Jersey 10", sans-serif;
                 font-weight: 400;
                 font-style: normal;
@@ -229,6 +247,7 @@
                 border-collapse: collapse;
                 width: 90%;
             }
+
 
             /*************************************************** Modele Photographe ***************************************************/
 

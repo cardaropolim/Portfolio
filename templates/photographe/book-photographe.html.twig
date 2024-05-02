@@ -5,47 +5,61 @@
 
 {% block body %}
 
-	<script>
-		/* Valeur true ou false selon le rôle */;
-var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-	</script>
+<script>
+	/* Valeur true ou false selon le rôle */;
+const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
+</script>
 
-
+<div class="sections">
 	{% for media in user.media %}
-		{# {% set destination = media.destination %} #}
+		
 
-			{% if media.destination == "section1" %}
-		<section id="Head">
-				<img src="{{ asset('upload/' ~ media.nom)}} alt=" une image ici">
-			{% endif %}
-		</section>
+		{% if media.destination == "section1" %}
+			<section id="Head">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici">
+			</section>
+		{% endif %}
 
-			{% if media.destination == "section2" %}
-		<section id="Biographie">
-				<img src="{{ asset('upload/' ~ media.nom)}} alt=" une image ici">
-			{% endif %}
-		</section>
+		{% if media.destination == "section2" %}
+			<section id="Biographie" style="text-align: center;>
+								<div style=" position: relative;">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici" style="display: block; margin: 0 auto;">
+				<div style="position: absolute; top: 20%; left: 80%; transform: translate(-50%, -50%);">
+					<div class="highlight">
+						<h2>{{ photographe.description }}</h2>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</section>
 
-			{% if media.destination == "section3" %}
+	{% if media.destination == "section3" %}
 		<section id="Bibliotheque">
-				<img src="{{ asset('upload/' ~ media.nom)}} alt=" une image ici">
-			{% endif %}
+			<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
+		{% endif %}
+	</section>
+
+	{% if media.destination == "section4" %}
+		<section id="Contact" style="text-align: center;">
+			<div style="position: relative;">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
+				<div style="position: absolute; top: 20%; left: 85%; transform: translate(-50%, -50%);">
+
+					<div class="highlight">
+						{# <h2>
+							<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
+						</h2> #}
+						<h2>
+							<a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a>
+						</h2>
+						<h2>{{ user.ville }}</h2>
+						<h2>{{ user.codePostal }}</h2>
+						<h2>{{ user.pays }}</h2>
+					</div>
+				</div>
+			</div>
 		</section>
-
-			{% if media.destination == "section4" %}
-		<section id="Contact">
-				<img src="{{ asset('upload/' ~ media.nom)}} alt=" une image ici">
-				<p>
-					<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
-				</p>
-				<p>
-					<a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
-				</p>
-
-			{% endif %}
-		</section>
-
-	{% endfor %}
-{% endblock %}
+	{% endif %}
+</div>{% endfor %}{% endblock %}
 

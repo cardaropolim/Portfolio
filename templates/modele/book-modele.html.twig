@@ -5,15 +5,15 @@
 
 {% block body %}
 
-	<script>
-		/* Valeur true ou false selon le rôle */;
+<script>
+	/* Valeur true ou false selon le rôle */;
 const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
 const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-	</script>
+</script>
 
 <div class="sections">
 	{% for media in user.media %}
-		 {# {% set destination = media.destination %}  #}
+		
 
 		{% if media.destination == "section1" %}
 			<section id="Head">
@@ -21,37 +21,45 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
 			</section>
 		{% endif %}
 
-			{% if media.destination == "section2" %}
-		<section id="Biographie">
-				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
-			{% endif %}
-		</section>
+		{% if media.destination == "section2" %}
+			<section id="Biographie" style="text-align: center;>
+								<div style=" position: relative;">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici" style="display: block; margin: 0 auto;">
+				<div style="position: absolute; top: 20%; left: 80%; transform: translate(-50%, -50%);">
+					<div class="highlight">
+						<h2>{{ modele.description }}</h2>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</section>
 
-			{% if media.destination == "section3" %}
+	{% if media.destination == "section3" %}
 		<section id="Bibliotheque">
-				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
-			{% endif %}
-		</section>
+			<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
+		{% endif %}
+	</section>
 
-{% if media.destination == "section4" %}
-<section id="Contact" style="text-align: center;">
-    <div style="position: relative;">
-        <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-            <h2>
-                <a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
-            </h2>
-            <h2>
-                <a href="mailto:modele1@gmail.com" style="text-decoration:none">modele1@gmail.com</a>
-            </h2>
-			<h2>{{ user.ville }}</h2>
-			<h2>{{ user.codePostal }}</h2>
-			<h2>{{ user.pays }}</h2>
-        </div>
-    </div>
-</section>
-{% endif %}
-</div>
-	{% endfor %}
-{% endblock %}
+	{% if media.destination == "section4" %}
+		<section id="Contact" style="text-align: center;">
+			<div style="position: relative;">
+				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
+				<div style="position: absolute; top: 20%; left: 85%; transform: translate(-50%, -50%);">
+
+					<div class="highlight">
+						{# <h2>
+							<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
+						</h2> #}
+						<h2>
+							<a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a>
+						</h2>
+						<h2>{{ user.ville }}</h2>
+						<h2>{{ user.codePostal }}</h2>
+						<h2>{{ user.pays }}</h2>
+					</div>
+				</div>
+			</div>
+		</section>
+	{% endif %}
+</div>{% endfor %}{% endblock %}
 
