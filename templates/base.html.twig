@@ -94,12 +94,29 @@
 			{% endfor %}
 			{% block body %}{% endblock %}
 
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <p>{{ "now"|date('F') }} {{ "now"|date("Y") }} Portfolio Cie. Tous droits réservés.&copy;</p>
+            </div>
+            <div class="col-md-6">
+			 <button class="index_button"><a href="{{ path('app_modele_FAQ') }}" >FAQ</a></button>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
 			<!-- Scroll To Top -->
 			<button onclick="topFunction()" id="scrollToTopButton" title="Haut de page">
 				<i class="fas fa-chevron-up"></i>
 			</button>
 		</div>
 		
+
+
+
 	</body>
 </html>
 
