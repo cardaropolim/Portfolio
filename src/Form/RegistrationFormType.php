@@ -14,6 +14,7 @@ use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Constraints\Regex;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class RegistrationFormType extends AbstractType
 {
@@ -42,6 +43,7 @@ class RegistrationFormType extends AbstractType
                     'max' => 5,
                     'exactMessage' => 'Le code postal doit contenir exactement {{ limit }} chiffres.',
                 ]),
+                new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
             ],
         ])
         ->add('pays', null, [

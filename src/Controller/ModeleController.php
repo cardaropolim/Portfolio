@@ -182,7 +182,7 @@ class ModeleController extends AbstractController
         }
 
         // Redirige vers la page d'accueil
-        return $this->redirectToRoute('app_modele_index');
+        return $this->redirectToRoute('app_modele_index',);
     }
 
     #[Route('/editTarif/{id}', name: 'edit_tarif')]
