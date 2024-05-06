@@ -228,9 +228,10 @@
             }
 
             .example_wrapper_modele_index {
+                position: relative;
                 height: 45em;
                 background-size: cover;
-                background-position: center center;
+                background-position: center ;
             }
 
             #Contact {

@@ -5,3 +5,7 @@ controllers:
     type: attribute
 
     
+delete_tarifs:
+    path: /deleteTarifs
+    controller: 'App\Controller\YourController::deleteTarif'
+    methods: ['POST']

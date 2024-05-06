@@ -49,7 +49,7 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-         // Redirect User with his role
+         // Redirection de l'Utilisateur avec son rôle
     if (in_array('ROLE_MODELE', $token->getRoleNames())) {
         return new RedirectResponse($this->urlGenerator->generate('app_modele_index'));
     }
@@ -57,9 +57,9 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         return new RedirectResponse($this->urlGenerator->generate('app_photographe_index'));
     }
 
-        // For example:
+     
         return new RedirectResponse($this->urlGenerator->generate('app_index'));
-       //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+     
     }
 
     protected function getLoginUrl(Request $request): string

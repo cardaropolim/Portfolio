@@ -26,7 +26,7 @@ class MediaType extends AbstractType
                 ],
                 'constraints' => [
                     new File([
-                        'maxSize' => '10M',
+                        'maxSize' => '20M',
                         'maxSizeMessage' => 'Fichier trop volumineux, {{ size }} maximum',
                         'mimeTypes' => ['image/jpg', 'image/jpeg', 'image/png', 'image/webp'],
                         'mimeTypesMessage' => "Formats autorisés: 'image/jpg', 'image/jpeg', 'image/png', 'image/webp' "

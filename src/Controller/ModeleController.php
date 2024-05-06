@@ -66,7 +66,7 @@ class ModeleController extends AbstractController
         ]);
     }
 
-    // méthode pour fill, récupérer, modifier informations modèle //
+    // remplir, récupérer, modifier informations utilisateur //
     #[Route('/user_informations/{id}', name: 'user_informations')]
     public function profile_user(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, $id, UserPasswordHasherInterface $userPasswordHasher, SecurityBundleSecurity $security): Response
     {
@@ -99,14 +99,14 @@ class ModeleController extends AbstractController
         ]);
     }
 
-
-
+    // accéder aux FAQ 
     #[Route('/FAQ', name: 'FAQ')]
     public function FAQ(): Response
     {
         return $this->render('modele/FAQ.html.twig', []);
     }
 
+    // accéder à la bibliothèque
     #[Route('/bibliotheque', name: 'bibliotheque')]
     public function bibliotheque(): Response
     {
@@ -118,8 +118,7 @@ class ModeleController extends AbstractController
         ]);
     }
 
-
-    // route book modele //
+    // accéder book modele //
     #[Route('/book_modele', name: 'book_modele')]
     public function book_modele(): Response
     {
@@ -134,7 +133,7 @@ class ModeleController extends AbstractController
         ]);
     }
 
-    // méthode pour ajouter des prestations/tarifs 
+    // ajouter des prestations/tarifs 
     #[Route('/tarifs', name: 'tarifs_form')]
     public function tarifs_form(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -165,11 +164,13 @@ class ModeleController extends AbstractController
         ]);
     }
 
-    #[Route('/deleteTarifs', name: 'delete_tarifs')]
+    // supprimer des prestations/tarifs 
+    #[Route('/deleteTarifs/{id}', name: 'delete_tarifs')]
     public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
     {
         // Vérifie si le token CSRF est valide
         if ($this->isCsrfTokenValid('delete' . $tarif->getId(), $request->request->get('_token'))) {
+
             // Supprime le tarif de la base de données
             $entityManager->remove($tarif);
             $entityManager->flush();
@@ -182,9 +183,11 @@ class ModeleController extends AbstractController
         }
 
         // Redirige vers la page d'accueil
-        return $this->redirectToRoute('app_modele_index',);
+        return $this->redirectToRoute('app_modele_index',
+    );
     }
 
+    // editer des prestations/tarifs     
     #[Route('/editTarif/{id}', name: 'edit_tarif')]
     public function editTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
     {
