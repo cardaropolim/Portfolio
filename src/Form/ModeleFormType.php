@@ -28,6 +28,7 @@ class ModeleFormType extends AbstractType
                 ],
             ])
             ->add('agence', TextType::class, [
+                'required' => false,
                 'constraints' => [
                     new Assert\NotBlank(),
                     new Assert\Length(['max' => 100]),
@@ -61,7 +62,7 @@ class ModeleFormType extends AbstractType
             ->add('taille', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Range(['max' => 10]),
+                    new Assert\Length(['max' => 10]),
                     new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
                     
                 ],
@@ -69,28 +70,28 @@ class ModeleFormType extends AbstractType
             ->add('taille_hanches', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Range(['max' => 10]),
+                    new Assert\Length(['max' => 10]),
                     new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
                 ],
             ])
             ->add('tour_de_poitrine', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Range(['max' => 10]),
+                    new Assert\Length(['max' => 10]),
                     new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
                 ],
             ])
             ->add('pointure', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Range(['max' => 10]),
+                    new Assert\Length(['max' => 10]),
                     new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
                 ],
             ])
             ->add('poids', IntegerType::class, [
                 'constraints' => [
                     new Assert\NotBlank(),
-                    new Assert\Range(['max' => 10]),
+                    new Assert\Length(['max' => 10]),
                     new Assert\Type(['type' => 'numeric', 'message' => 'Ce champ doit contenir uniquement des chiffres.']),
                 ],
             ])
@@ -106,7 +107,7 @@ class ModeleFormType extends AbstractType
             ])
             ->add('signes_particuliers', TextType::class, [
                 'constraints' => [
-                    new Assert\Length(['max' => 255]),
+                    new Assert\Length(['max' => 70]),
                     new Regex([
                         'pattern' => '/^[a-zA-Z\s]+$/',
                         'message' => 'Signes particuliers ne peut contenir que des lettres.',

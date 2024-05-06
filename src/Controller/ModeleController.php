@@ -95,7 +95,7 @@ class ModeleController extends AbstractController
         }
 
         return $this->render('modele/registration-form.html.twig', [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
