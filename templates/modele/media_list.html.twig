@@ -4,27 +4,28 @@
 
 {% block body %}
 
-    
-    <h1>Liste des médias</h1>
+<h1>Liste des médias</h1>
 
-        <!-- Bouton pour accéder à la liste des médias -->
-    <a href="{{ path('app_modele_media_create') }}" class="index_button">Ajouter des médias</a>
-    {% if medias is empty %}
-        <p>Aucun média trouvé.</p>
-    {% else %}
-        <div class="row">
-            {% for media in user.media %}
-                <div class="col-md-3 mb-3">
-                    <div class="card">
-                        <img src="{{ asset('upload/' ~ media.nom) }}" class="card-img-top" alt="{{ media.nom }}">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ media.nom }}</h5>
-                            <h5 class="card-title">{{ media.destination }}</h5>
-                            <a href="{{ path('app_modele_media_delete', {'id': media.id}) }}" class="btn btn-danger">Supprimer</a>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-    {% endif %}
+<!-- Bouton pour accéder à la liste des médias -->
+<a href="{{ path('app_modele_media_create') }}" class="index_button">Ajouter des médias</a>
+{% if medias is empty %}
+    <p>Aucun média trouvé.</p>
+{% else %}
+    <div class="row">
+{% for media in medias %}
+    <div class="col-md-3 mb-3">
+        <div class="card">
+            <img src="{{ asset('upload/' ~ media.nom) }}" class="card-img-top" alt="{{ media.nom }}">
+            <div class="card-body">
+                <h5 class="card-title">{{ media.nom }}</h5>
+                <p>Taille: {{ media.width }}x{{ media.height }}</p>
+                <h5 class="card-title">{{ media.destination }}</h5>
+                <a href="{{ path('app_modele_media_delete', {'id': media.id}) }}" class="btn btn-danger">Supprimer</a>
+            </div>
         </div>
+    </div>
+{% endfor %}
+
+    </div>
+{% endif %}
 {% endblock %}

@@ -30,6 +30,16 @@ class Media
     #[ORM\ManyToOne(inversedBy: 'media')]
     private ?User $user = null;
 
+        /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $width;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $height;
+
 
     public function getId(): ?int
     {
@@ -80,6 +90,30 @@ class Media
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getWidth(): ?int
+    {
+        return $this->width;
+    }
+
+    public function setWidth(int $width): self
+    {
+        $this->width = $width;
+
+        return $this;
+    }
+
+    public function getHeight(): ?int
+    {
+        return $this->height;
+    }
+
+    public function setHeight(int $height): self
+    {
+        $this->height = $height;
 
         return $this;
     }

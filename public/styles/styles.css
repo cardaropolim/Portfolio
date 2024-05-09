@@ -72,7 +72,9 @@
             /*//////////////////////////////// Style BOUTONS //////////////////////////////////*/
 
             .index_button,
-            button {
+          
+            button 
+            {
                 --font-color:
                     background-color: #f5d3c8;
                 background-image: linear-gradient(315deg, #f5d3c8 0%, #c08552 74%);
@@ -83,7 +85,7 @@
                 background: linear-gradient(to left, #EAEAEA, #DBDBDB, #F2F2F2, #ADA996);
                 --main-color: #75151588;
                 width: 160px;
-                height: 35px;
+                /* height: 35px; */
                 border-radius: 5px;
                 border: 2px solid var(--main-color);
                 background-color: var(--bg-color);
@@ -176,6 +178,7 @@
                     margin-left: -100%;
                     transition: fadeIn 5s;
                     justify-content: center;
+                    z-index: 1;
                 }
 
                 .nav-links li {
@@ -374,6 +377,15 @@
                 color: rgb(0, 0, 0);
             }
 
+            .card {
+                transition: transform 0.2s; /* Ajoute une transition fluide */
+                padding: 5px;
+                margin-right: 15px;
+            }
+        
+            .card:hover {
+                transform: scale(1.3); /* Agrandit la carte au survol */
+            }
             /***************************************************scrollTopButton ***************************************************/
 
             /* Styles pour le bouton de retour en haut de page */

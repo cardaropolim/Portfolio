@@ -4,11 +4,7 @@
 
 {% block body %}
 
-<script>
-    /* Valeur true ou false selon le rôle */;
-const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-</script>
+
 
 <!-- La structure HTML pour l'image en plein écran -->
 <div id="fullscreen-overlay">

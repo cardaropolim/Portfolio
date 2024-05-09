@@ -308,10 +308,19 @@ class ModeleController extends AbstractController
         // Récupérer les médias de l'utilisateur
         $medias = $user->getMedia();
 
+        // Récupérez les dimensions de chaque image
+        foreach ($medias as &$media) {
+            $imagePath = $this->getParameter('kernel.project_dir') . '/public/upload/' . $media->getNom();
+            $imageSize = getimagesize($imagePath);
+            $media->setWidth($imageSize[0]);
+            $media->setHeight($imageSize[1]);
+        }
         return $this->render('modele/media_list.html.twig', [
             'user' => $user,
             'medias' => $medias,
             'modele' => $modele,
         ]);
     }
+
 }
+    

@@ -83,7 +83,7 @@ class Modele
     {
         return $this->signes_particuliers;
     }
-
+    
     public function setSignesParticuliers(?string $signes_particuliers): static
     {
         $this->signes_particuliers = $signes_particuliers;

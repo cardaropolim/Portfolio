@@ -2,13 +2,9 @@
 
 // Sélectionnez l'élément du menu hamburger en utilisant un sélecteur plus spécifique (si nécessaire)
 const menuHamburger = document.querySelector(".menu-hamburger");
-
-const linksModele = document.querySelector("#links-modele")
-
-const linksPhotographe = document.querySelector("#links-photographe")
-
-// Sélectionnez également le conteneur des liens de navigation
 const navLinks = document.querySelector(".nav-links");
+const linksModele = document.querySelector("#links-modele");
+const linksPhotographe = document.querySelector("#links-photographe");
 
 // Vérifiez qu'il n'y a pas d'erreurs JavaScript
 console.log("menuHamburger :", menuHamburger); // Vérification de la sélection de l'élément
@@ -34,6 +30,25 @@ menuHamburger.addEventListener('click', () => {
     }
 });
 
+// Sélectionnez tous les liens à l'intérieur du menu hamburger
+const menuLinks = document.querySelectorAll(".nav-links a");
+
+// Ajoutez un gestionnaire d'événements à chaque lien du menu hamburger
+menuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        // Fermez le menu en retirant la classe 'mobile-menu'
+        navLinks.classList.remove('mobile-menu');
+        
+        // Vous pouvez également cacher les liens spécifiques ici si nécessaire
+        if (isModele) {
+            linksModele.classList.remove('hidden');
+        }
+        if (isPhotographe) {
+            linksPhotographe.classList.remove('hidden');
+        }
+    });
+});
+
 // Ajoutez un écouteur d'événement au redimensionnement de la fenêtre
 window.addEventListener('resize', () => {
     // Vérifiez si le menu mobile est affiché et que la largeur de la fenêtre est supérieure à 900 pixels
@@ -41,7 +56,6 @@ window.addEventListener('resize', () => {
         navLinks.classList.remove('mobile-menu');
     }
 });
-console.log(menuHamburger);
 
 // Scroll to Top Button
 
@@ -71,13 +85,11 @@ function topFunction() {
 const loadFile = function (event) {
     const image = document.getElementById('image');
 
-if(image) {
-
-    // Afficher l'aperçu de l'image sélectionnée
-    image.src = URL.createObjectURL(event.target.files[0]);
-}
+    if(image) {
+        // Afficher l'aperçu de l'image sélectionnée
+        image.src = URL.createObjectURL(event.target.files[0]);
+    }
 };
-
 
 ////////////////////////////////////////////
 
@@ -111,5 +123,3 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 });
-
-

@@ -4,11 +4,8 @@
 
 {% block body %}
 
-<script>
-    /* Valeur true ou false selon le rôle */;
-const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-</script>
+
+
 
 <!-- La structure HTML pour l'image en plein écran -->
 <div id="fullscreen-overlay">
@@ -24,13 +21,13 @@ const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
         {% for media in user.media %}
             {% if media.destination == "bibliotheque" %}
                 <div class="col-md-3 mb-3">
-                    <div class="thumbnail">
-                        <img class="thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+                    <div class="card">
+                        <img class="card-img-top thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
+                        <div class="card-body">
+                            <!-- Contenu supplémentaire de la carte ici si nécessaire -->
+                        </div>
                     </div>
                 </div>
-                {% if loop.index % 4 == 0 %}
-                    </div><div class="row">
-                {% endif %}
             {% endif %}
         {% endfor %}
     </div>
