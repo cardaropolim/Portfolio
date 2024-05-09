@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
+        <!-- Bouton de retour à la page précédente -->
+        <button class="back" onclick="history.back()" >⬅️</button>
 <!-- Bouton pour accéder à la liste des médias -->
  <button><a href="{{ path('app_photographe_media_list') }}" >Liste des médias</a></button>
 

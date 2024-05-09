@@ -7,6 +7,8 @@
     
     <h1>Liste des médias</h1>
 
+        <!-- Bouton de retour à la page précédente -->
+        <button class="back" onclick="history.back()" >⬅️</button>
         <!-- Bouton pour accéder à la liste des médias -->
     <a href="{{ path('app_photographe_media_create') }}" class="index_button">Ajouter des médias</a>
     {% if medias is empty %}

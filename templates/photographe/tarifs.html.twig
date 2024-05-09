@@ -4,6 +4,11 @@
 
 {% block body %}
 
+        <h1>Complêtez vos tarifs</h1>
+
+        <!-- Bouton de retour à la page précédente -->
+        <button class="back" onclick="history.back()" >⬅️</button>
+
     {% block form_row %}        
         {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
         <div class="container">

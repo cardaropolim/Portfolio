@@ -89,7 +89,7 @@
                 border-radius: 5px;
                 border: 2px solid var(--main-color);
                 background-color: var(--bg-color);
-                box-shadow: 5px 5px var(--main-color);
+                filter:drop-shadow(7px 7px 10px rgb(172, 130, 130));
                 font-size: 17px;
                 font-weight: 600;
                 color: var(--font-color);
@@ -134,10 +134,6 @@
 
             }
 
-            .navbar .nav-links ul li:hover {
-                background-color: rgb(144, 189, 207);
-                cursor: grab;
-            }
 
             /* Style pour la disposition des éléments en ligne sans enveloppement */
             .row.py-3 {
@@ -179,6 +175,7 @@
                     transition: fadeIn 5s;
                     justify-content: center;
                     z-index: 1;
+                   
                 }
 
                 .nav-links li {
@@ -189,6 +186,8 @@
 
                 .nav-links.mobile-menu {
                     margin-left: 0;
+                    margin-bottom: 2em;
+                    
                     justify-content: center;
                     align-items: center;
                 }
@@ -210,7 +209,7 @@
                 .navbar-base .nav-links ul li {
                     margin: 25px 0;
                     
-                    font-size: 1.5em;
+                    /* font-size: 1.5em; */
                 }
 
             }
@@ -416,4 +415,10 @@
             #scrollToTopButton:focus-within {
                 cursor: pointer;
                 background-color: #27812e;
+            }
+
+            .back {
+                width: 1.5em;
+                height: 1.5em;
+                text-align: center;
             }
