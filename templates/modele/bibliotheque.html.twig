@@ -4,7 +4,7 @@
 
 {% block body %}
 
-
+    <div class="links-modele"></div>
 <!-- La structure HTML pour l'image en plein écran -->
 <div id="fullscreen-overlay">
     <div id="fullscreen-image-container">
@@ -19,7 +19,7 @@
         {% for media in user.media %}
             {% if media.destination == "bibliotheque" %}
                 <div class="col-md-3 mb-3">
-                    <div class="card">
+                    <div class="card h-100">
                         <img class="card-img-top thumbnail-image" src="{{ asset('upload/' ~ media.nom) }}" alt="une image ici">
                         <div class="card-body">
                             <!-- Contenu supplémentaire de la carte ici si nécessaire -->

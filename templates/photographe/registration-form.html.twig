@@ -3,6 +3,7 @@
 {% block title %}Inscription{% endblock %}
 
 {% block body %}
+<div class="links-photographe"></div>
     <h1>Modifier vos informations utilisateur</h1>  
 
         <!-- Bouton de retour à la page précédente -->
@@ -26,7 +27,7 @@
                 <button type="submit" class="index_button">Enregistrer</button>
             {{ form_end(form) }}
 
-        {# <button class="index_button"><a href="{{ url('app_modele_FAQ') }}" >F A Q</a></button> #}
+
         <a href={{ url('app_photographe_FAQ') }} class="index_button">Suppression du compte</a>
 
 

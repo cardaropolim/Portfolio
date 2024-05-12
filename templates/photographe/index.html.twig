@@ -4,18 +4,14 @@
 
 {% block body %}
 
-<script>
-    /* Valeur true ou false selon le rôle */;
-    var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-    var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-</script>
 
 
 <div class="example-wrapper_photographe_index" style='background-image:linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url({{ asset('images/apn.png' )  }})'>
     <h1>Bienvenue sur Photographe Portfolio</h1> 
 
 <div class="container_index_photographe">
-    <div class="row py-3" id="links-photographe">
+<div class="links-photographe">
+    <div class="row py-3" >
         <div class="col-5 order-2" id="sticky-sidebar">
             <div class="sticky-sm-top">
                 <div class="nav flex-column">
@@ -26,6 +22,7 @@
 
                 </div>
             </div>
+        </div>
         </div>
 
 

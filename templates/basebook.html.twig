@@ -22,11 +22,12 @@
 		{% endblock %}
 		<script src="{{ asset("js/script.js") }}" defer></script>
 		
-		<script>
+<script>
 
     var isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
+
     var isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-</script defer>
+</script>
 
 		 {% endblock %}
 	</head>
@@ -103,7 +104,7 @@
 	
 			<!-- Scroll To Top -->
 			<button onclick="topFunction()" id="scrollToTopButton" title="Haut de page">
-				<i class="fas fa-chevron-up"></i>
+				<i class="fas fa-chevron-up"></i>⬆️
 			</button>
 
 </div> 

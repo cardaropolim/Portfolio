@@ -1,34 +1,17 @@
+
+
 // Menu Hamburger
 
 // Sélectionnez l'élément du menu hamburger en utilisant un sélecteur plus spécifique (si nécessaire)
 const menuHamburger = document.querySelector(".menu-hamburger");
 const navLinks = document.querySelector(".nav-links");
-const linksModele = document.querySelector("#links-modele");
-const linksPhotographe = document.querySelector("#links-photographe");
+const linksModele = document.querySelector(".links-modele");
+const linksPhotographe = document.querySelector(".links-photographe");
 
-// Vérifiez qu'il n'y a pas d'erreurs JavaScript
-console.log("menuHamburger :", menuHamburger); // Vérification de la sélection de l'élément
 
-menuHamburger.addEventListener('click', () => {
-    // Basculez la classe 'mobile-menu' sur le conteneur du menu mobile
-    navLinks.classList.toggle('mobile-menu');
+// // Vérifiez qu'il n'y a pas d'erreurs JavaScript
+// console.log("menuHamburger :", menuHamburger); // Vérification de la sélection de l'élément
 
-    if (navLinks.classList.contains('mobile-menu')) {
-        if (isModele) {
-            linksModele.classList.add('hidden');
-        }
-        if (isPhotographe) {
-            linksPhotographe.classList.add('hidden');
-        }
-    } else {
-        if (isModele) {
-            linksModele.classList.remove('hidden');
-        }
-        if (isPhotographe) {
-            linksPhotographe.classList.remove('hidden');
-        }
-    }
-});
 
 // Sélectionnez tous les liens à l'intérieur du menu hamburger
 const menuLinks = document.querySelectorAll(".nav-links a");
@@ -57,6 +40,26 @@ window.addEventListener('resize', () => {
     }
 });
 
+menuHamburger.addEventListener('click', () => {
+    // Basculez la classe 'mobile-menu' sur le conteneur du menu mobile
+    navLinks.classList.toggle('mobile-menu');
+
+    if (navLinks.classList.contains('mobile-menu')) {
+        if (isModele) {
+            linksModele.classList.add('hidden');
+        }
+        if (isPhotographe) {
+            linksPhotographe.classList.add('hidden');
+        }
+    } else {
+        if (isModele) {
+            linksModele.classList.remove('hidden');
+        }
+        if (isPhotographe) {
+            linksPhotographe.classList.remove('hidden');
+        }
+    }
+});
 // Scroll to Top Button
 
 // execute la fonction lorsque la fenêtre est scrollée

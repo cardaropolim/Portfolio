@@ -7,6 +7,8 @@
 
 <h1>Complêtez vos tarifs</h1>
 
+<div class="links-modele"></div>
+
         <!-- Bouton de retour à la page précédente -->
         <button class="back" onclick="history.back()" >⬅️</button>
         
@@ -38,13 +40,13 @@
 <br>
 
     <div id="list-tarifs">
-        <table class="table table-info">
+        <table class="table table-light">
             <thead class="thead-dark">
                 <tr>
                     <th>Prestations</th>
                     <th>Prix</th>
                     <th>Actions</th>
-                </tr>
+                </tr>   
             </thead>
             <tbody>
                 {% for tarif in tarifsUser %}

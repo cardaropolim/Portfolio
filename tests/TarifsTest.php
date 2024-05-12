@@ -53,10 +53,9 @@ class TarifsTest extends KernelTestCase
             $errors = $container->get('validator')->validate($tarifs);
 
             // Vérification du nombre d'erreurs pour qu'il soit égal à un
-            $this->assertCount(0, $errors);
+            $this->assertCount(1, $errors);
         }
     }
-
 
 
             // $routerService = static::getContainer()->get('router');

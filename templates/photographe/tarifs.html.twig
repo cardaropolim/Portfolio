@@ -5,17 +5,20 @@
 {% block body %}
 
         <h1>Complêtez vos tarifs</h1>
-
+<div class="links-photographe"></div>
         <!-- Bouton de retour à la page précédente -->
         <button class="back" onclick="history.back()" >⬅️</button>
 
-    {% block form_row %}        
+<div class="tarif_template">
+    {% block form_row %} 
+    <div class="Container_parent">
+<div class="Container">       
         {{ form_start(form, { 'attr': {'id': 'tarifForm'} }) }}  
         <div class="container">
         <div class="form-group">
             <label for="{{ form.prestations.vars.id }}">Prestation</label>
             {{ form_widget(form.prestations, {'attr': {'class': 'form-control'}}) }}
-        </div>
+      
         
         <div class="form-group">
             <label for="{{ form.prix.vars.id }}">Prix</label>
@@ -32,9 +35,9 @@
 
 {% if tarifsUser is not empty %}
 <br>
-<div class="container">
+
     <div id="list-tarifs">
-        <table class="table table-info">
+        <table class="table table-light">
             <thead class="thead-dark">
                 <tr>
                     <th>Prestations</th>
@@ -48,10 +51,10 @@
                         <td>{{ tarif.prestations }}</td>
                         <td>{{ tarif.prix }}€</td>
                         <td>
-                            <form style="display: inline-block;" action="{{ path('app_modele_edit_tarif', {'id': tarif.id}) }}" method="get">
+                            <form style="display: inline-block;" action="{{ path('app_photographe_edit_tarif', {'id': tarif.id}) }}" method="get">
                                 <button type="submit" >Modifier</button>
                             </form>
-                            <form style="display: inline-block;" action="{{ path('app_modele_delete_tarifs', {'id': tarif.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tarif ?');">
+                            <form style="display: inline-block;" action="{{ path('app_photographe_delete_tarifs', {'id': tarif.id}) }}" method="post" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce tarif ?');">
                                 <input type="hidden" name="_method" value="DELETE">
                                 <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ tarif.id) }}">
                                 <button type="submit" >Supprimer</button>
@@ -66,7 +69,9 @@
     <div id="tarifforms"></div>
     </div>  
        {% endif %}
-
+</div>
+</div>
+</div>
     <script>
         const form = document.getElementById('tarifForm');
         document.getElementById('add-input').addEventListener('click', function () {

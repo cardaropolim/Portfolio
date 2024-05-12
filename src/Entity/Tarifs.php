@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\TarifsRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: TarifsRepository::class)]
 class Tarifs
@@ -14,6 +16,7 @@ class Tarifs
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Le champ 'prestations' ne peut pas être vide.")]
     private ?string $prestations = null;
 
     #[ORM\Column]

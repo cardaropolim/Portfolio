@@ -19,7 +19,7 @@ class TarifType extends AbstractType
             ->add('prestations', null, [
                 'constraints' => [
                     new Regex([
-                        'pattern' => '/^[a-zA-Z\s]+$/',
+                        'pattern' => '/^[a-zA-Z\s\',.:-éèçà]+$/',
                         'message' => 'Les prestations ne peut contenir que des lettres.',
                     ]),
                 ],

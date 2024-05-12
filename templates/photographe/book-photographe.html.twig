@@ -5,12 +5,8 @@
 
 {% block body %}
 
-<script>
-	/* Valeur true ou false selon le rôle */;
-const isModele = {{ is_granted('ROLE_MODELE') ? 'true' : 'false' }};
-const isPhotographe = {{ is_granted('ROLE_PHOTOGRAPHE') ? 'true' : 'false' }};
-</script>
 
+<div class="links-photographe"></div>
 <div class="sections">
 	{% for media in user.media %}
 		

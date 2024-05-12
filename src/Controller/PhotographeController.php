@@ -43,20 +43,28 @@ class PhotographeController extends AbstractController
     #[Route('/informations-profile', name: 'photographe_profile')]
     public function profile(Request $request, EntityManagerInterface $entityManager): Response
     {
-
+    // Crée une nouvelle instance de l'entité "Modele"
         $photographe = new Photographe();
+         // Vérifie si l'utilisateur actuel a déjà un profil de modèle enregistré
         if ($this->getUser()->getPhotographe()) {
+        // Si oui, récupère les données du modèle de l'utilisateur actuel
             $photographe = $this->getUser()->getPhotographe();
         }
 
         $photographe->setUser($this->getUser());
+            // Crée un formulaire Symfony à partir de la classe de formulaire "ModeleFormType" et l'associe aux données du modèle
         $form = $this->createForm(PhotographeFormType::class, $photographe);
+
+    // Traite la requête HTTP pour remplir et valider le formulaire.
         $form->handleRequest($request);
 
+    // Vérifie si le formulaire a été soumis et si les données sont valides
         if ($form->isSubmitted() && $form->isValid()) {
+            // Persiste les données du modèle en base de données
             $entityManager->persist($photographe);
+        // Applique les changements en base de données
             $entityManager->flush();
-
+        // Redirige l'utilisateur vers une autre page après la soumission réussie du formulaire
             return $this->redirectToRoute('app_photographe_index');
         }
         return $this->render('photographe/profile-form.html.twig', [
@@ -64,7 +72,7 @@ class PhotographeController extends AbstractController
         ]);
     }
 
-        // méthode pour fill, récupérer, modifier informations modèle //
+        // remplir, récupérer, modifier informations modèle //
         #[Route('/user_informations/{id}', name: 'user_informations')]
         public function profile_user(Request $request, EntityManagerInterface $entityManager, UserRepository $userRepository, $id, UserPasswordHasherInterface $userPasswordHasher, Security $security): Response
         {
@@ -97,13 +105,13 @@ class PhotographeController extends AbstractController
             ]);
         }
 
-
+    // accéder aux FAQ 
     #[Route('/FAQ', name: 'FAQ')]
     public function FAQ(): Response
     {
         return $this->render('photographe/FAQ.html.twig', []);
     }
-    
+        // accéder à la bibliothèque
     #[Route('/bibliotheque', name: 'bibliotheque')]
     public function bibliotheque(): Response
     {
@@ -160,8 +168,8 @@ class PhotographeController extends AbstractController
             'tarifsUser' => $tarifsUser
         ]);
     }
-
-    #[Route('/deleteTarifs', name: 'delete_tarifs')]
+    // supprimer des prestations/tarifs 
+    #[Route('/deleteTarifs/{id}', name: 'delete_tarifs')]
     public function deleteTarif(Request $request, EntityManagerInterface $entityManager, Tarifs $tarif): Response
     {
         // Vérifie si le token CSRF est valide

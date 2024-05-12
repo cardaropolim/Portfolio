@@ -43,28 +43,45 @@ class ModeleController extends AbstractController
     }
 
 
-    // méthode pour fill, récupérer, modifier informations modèle //
-    #[Route('/informations-profile', name: 'modeleprofile')]
-    public function profile(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $modele = new Modele();
-        if ($this->getUser()->getModele()) {
-            $modele = $this->getUser()->getModele();
-        }
-        $modele->setUser($this->getUser());
-        $form = $this->createForm(ModeleFormType::class, $modele);
-        $form->handleRequest($request);
+   // méthode pour fill, récupérer, modifier informations modèle //
+#[Route('/informations-profile', name: 'modeleprofile')]
+public function profile(Request $request, EntityManagerInterface $entityManager): Response
+{
+    // Crée une nouvelle instance de l'entité "Modele"
+    $modele = new Modele();
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($modele);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_modele_index');
-        }
-        return $this->render('modele/profile-form.html.twig', [
-            'form' => $form->createView(),
-        ]);
+    // Vérifie si l'utilisateur actuel a déjà un profil de modèle enregistré
+    if ($this->getUser()->getModele()) {
+        // Si oui, récupère les données du modèle de l'utilisateur actuel
+        $modele = $this->getUser()->getModele();
     }
+
+    // Associe le modèle à l'utilisateur actuellement authentifié
+    $modele->setUser($this->getUser());
+
+    // Crée un formulaire Symfony à partir de la classe de formulaire "ModeleFormType" et l'associe aux données du modèle
+    $form = $this->createForm(ModeleFormType::class, $modele);
+
+    // Traite la requête HTTP pour remplir et valider le formulaire.
+    $form->handleRequest($request);
+
+    // Vérifie si le formulaire a été soumis et si les données sont valides
+    if ($form->isSubmitted() && $form->isValid()) {
+        // Persiste les données du modèle en base de données
+        $entityManager->persist($modele);
+        
+        // Applique les changements en base de données
+        $entityManager->flush();
+
+        // Redirige l'utilisateur vers une autre page après la soumission réussie du formulaire
+        return $this->redirectToRoute('app_modele_index');
+    }
+
+    return $this->render('modele/profile-form.html.twig', [
+        'form' => $form->createView(),
+    ]);
+}
+
 
     // remplir, récupérer, modifier informations utilisateur //
     #[Route('/user_informations/{id}', name: 'user_informations')]

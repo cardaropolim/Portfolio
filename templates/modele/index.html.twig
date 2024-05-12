@@ -11,18 +11,19 @@
     <h1>Bienvenue sur Modèle Portfolio</h1> 
 
 <div class="container_modele_index">
-    <div class="row py-3" id="links-modele">
+    <div class="links-modele">
+    <div class="row py-3">
         <div class="col-5 order-2" id="sticky-sidebar">
             <div class="sticky-sm-top">
                 <div class="nav flex-column">
         <a href={{ url('app_modele_modeleprofile') }} class="index_button">Mes Informations</a><br>
         <a href={{ url('app_modele_tarifs_form') }} class="index_button">Mes Tarifs</a><br> 
-        <a href={{ url('app_modele_media_create') }} class="index_button">Mes Media</a><br>
+        <a href={{ url('app_modele_media_create') }} class="index_button">Mes Médias</a><br>
         <a href={{ url('app_modele_user_informations', {'id': user.id}) }} class="index_button">Mon compte</a>
 
                 </div>
             </div>
         </div>
-
+</div
 
 {% endblock %}      
