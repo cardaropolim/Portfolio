@@ -131,10 +131,14 @@ class PhotographeController extends AbstractController
         // Récupère les données de l'utilisateur
         $user = $this->getUser(); 
         $photographe = $user->getPhotographe();
+         
+        // Récupère les tarifs de l'utilisateur
+        $tarifs = $user->getTarifs();
 
         return $this->render('photographe/book-photographe.html.twig', [
             'user' => $user,
-            'photographe' => $photographe
+            'photographe' => $photographe,
+            'tarifs' => $tarifs
         ]);
     }
 

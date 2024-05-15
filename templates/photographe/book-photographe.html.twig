@@ -1,61 +1,67 @@
 {% extends "basebook.html.twig" %}
 
-{% block title %}Book!
-{% endblock %}
+{% block title %}Book!{% endblock %}
 
 {% block body %}
-
-
 <div class="links-photographe"></div>
 <div class="sections">
-	{% for media in user.media %}
-		
+    {% for media in user.media %}
+        {% if media.destination == "section1" %}
+            <section id="Head">
+                <div style="position: relative;">
+                    <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="Une image ici" style="display: block; margin: 0 auto;">
+                    <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
+                        <h2>{{ photographe.description }}</h2>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% endfor %}
 
-		{% if media.destination == "section1" %}
-			<section id="Head">
-				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici">
-			</section>
-		{% endif %}
+    {% for media in user.media %}
+        {% if media.destination == "section2" %}
+            <section id="Biographie" style="text-align: center;">
+                <div style=" position: relative;">
+                    <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici" style="display: block; margin: 0 auto;">
+                    <div class="highlight" style="position: absolute; top: 20%; right: 10%; padding: 2%;">
+                        {% for tarif in tarifs %}	           
+                            <h2>{{ tarif.prestations }}</h2>
+                            <h2>{{ tarif.prix }}€</h2>
+                        {% endfor %}
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% endfor %}
 
-		{% if media.destination == "section2" %}
-			<section id="Biographie" style="text-align: center;>
-								<div style=" position: relative;">
-				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici" style="display: block; margin: 0 auto;">
-				<div style="position: absolute; top: 20%; left: 80%; transform: translate(-50%, -50%);">
-					<div class="highlight">
-						<h2>{{ photographe.description }}</h2>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-	</section>
+    {% for media in user.media %}
+        {% if media.destination == "section3" %}
+            <section id="Bibliotheque">
+                <div style="position: relative;">
+                    <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
+                    <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
+                        <h2>Signes particuliers: {{ photographe.signesParticuliers }}</h2>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% endfor %}
 
-	{% if media.destination == "section3" %}
-		<section id="Bibliotheque">
-			<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
-		{% endif %}
-	</section>
-
-	{% if media.destination == "section4" %}
-		<section id="Contact" style="text-align: center;">
-			<div style="position: relative;">
-				<img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
-				<div style="position: absolute; top: 20%; left: 85%; transform: translate(-50%, -50%);">
-
-					<div class="highlight">
-						{# <h2>
-							<a href="tel:6.01.02.03.04" style="text-decoration:none">06.01.02.03.04</a>
-						</h2> #}
-						<h2>
-							<a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a>
-						</h2>
-						<h2>{{ user.ville }}</h2>
-						<h2>{{ user.codePostal }}</h2>
-						<h2>{{ user.pays }}</h2>
-					</div>
-				</div>
-			</div>
-		</section>
-	{% endif %}
-</div>{% endfor %}{% endblock %}
-
+    {% for media in user.media %}
+        {% if media.destination == "section4" %}
+            <section id="Contact">
+                <div style="position: relative;">
+                    <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
+                    <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
+                        <h2>Coordonnées :</h2>
+                        <h2><a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a></h2>
+                        <h2>{{ user.ville }}</h2>
+                        <h2>{{ user.codePostal }}</h2>
+                        <h2>{{ user.pays }}</h2>
+                    </div>
+                </div>
+            </section>
+        {% endif %}
+    {% endfor %}
+</div>
+{% endblock %}

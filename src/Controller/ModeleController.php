@@ -144,9 +144,13 @@ public function profile(Request $request, EntityManagerInterface $entityManager)
         $user = $this->getUser();
         $modele = $user->getModele();
 
+        // Récupère les tarifs de l'utilisateur
+        $tarifs = $user->getTarifs();
+
         return $this->render('modele/book-modele.html.twig', [
             'user' => $user,
-            'modele' => $modele,    
+            'modele' => $modele,
+            'tarifs' => $tarifs    
         ]);
     }
 

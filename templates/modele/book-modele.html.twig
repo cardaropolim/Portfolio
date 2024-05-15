@@ -25,8 +25,10 @@
                 <div style="position: relative; text-align: left;">
                     <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="Une image ici" style="display: block; margin: 0 auto;">
                     <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
-                        <h2>Couleur des yeux: {{ modele.couleurYeux }}</h2>
-                    </div>
+                        {% for tarif in tarifs %}	           
+                            <h2>{{ tarif.prestations }}</h2>
+                            <h2>{{ tarif.prix }}€</h2>
+                        {% endfor %}                    </div>
                 </div>
             </section>
         {% endif %}
