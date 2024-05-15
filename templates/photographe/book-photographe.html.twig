@@ -11,7 +11,7 @@
                 <div style="position: relative;">
                     <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="Une image ici" style="display: block; margin: 0 auto;">
                     <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
-                        <h2>{{ photographe.description }}</h2>
+                        <h3>{{ photographe.description }}</h3>
                     </div>
                 </div>
             </section>
@@ -24,11 +24,22 @@
                 <div style=" position: relative;">
                     <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici" style="display: block; margin: 0 auto;">
                     <div class="highlight" style="position: absolute; top: 20%; right: 10%; padding: 2%;">
-                        {% for tarif in tarifs %}	           
-                            <h2>{{ tarif.prestations }}</h2>
-                            <h2>{{ tarif.prix }}€</h2>
-                        {% endfor %}
-                    </div>
+                     <table>
+                                <thead>
+                                    <tr>
+                                        <th>Prestations</th>
+                                        <th>Prix</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for tarif in tarifs %}	           
+                                        <tr>
+                                            <td>{{ tarif.prestations }}</td>
+                                            <td>{{ tarif.prix }}€</td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
                 </div>
             </section>
         {% endif %}
@@ -40,7 +51,7 @@
                 <div style="position: relative;">
                     <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt=" une image ici">
                     <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
-                        <h2>Signes particuliers: {{ photographe.signesParticuliers }}</h2>
+                        <h3>Signes particuliers: {{ photographe.signesParticuliers }}</h3>
                     </div>
                 </div>
             </section>
@@ -53,11 +64,11 @@
                 <div style="position: relative;">
                     <img src="{{ asset('upload/' ~ media.nom) }}" class="media_book" alt="une image ici" style="display: block; margin: 0 auto;">
                     <div class="highlight" style="position: absolute; top: 10%; right: 10%; padding: 2%;">
-                        <h2>Coordonnées :</h2>
-                        <h2><a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a></h2>
-                        <h2>{{ user.ville }}</h2>
-                        <h2>{{ user.codePostal }}</h2>
-                        <h2>{{ user.pays }}</h2>
+                        <h3>Coordonnées :</h3>
+                        <h3><a href="mailto:{{ user.email }}" style="text-decoration:none">{{ user.email }}</a></h3>
+                        <h3>{{ user.ville }}</h3>
+                        <h3>{{ user.codePostal }}</h3>
+                        <h3>{{ user.pays }}</h3>
                     </div>
                 </div>
             </section>
