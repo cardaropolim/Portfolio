@@ -377,7 +377,7 @@
                 transition: transform 0.2s; /* Ajoute une transition fluide */
                 padding: 5px;
                 margin-right: 15px;
-
+               
             }
         
             .card:hover {
